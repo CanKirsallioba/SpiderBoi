@@ -30,9 +30,9 @@ public class Cell extends Sprite {
 
 
     public Cell(Texture img){
+        Pixmap pixmap = img.getTextureData().consumePixmap();
         for (int i = 0; i < img.getHeight(); i++) {
             for (int j = 0; j < img.getWidth(); j++ ) {
-                Pixmap pixmap = img.getTextureData().consumePixmap();
                 Color color = new Color(pixmap.getPixel(i, j));
                 int r = (int)(color.r * 255f);
                 int g = (int)(color.g * 255f);

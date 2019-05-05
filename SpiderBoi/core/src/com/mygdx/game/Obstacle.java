@@ -1,15 +1,15 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
+        import com.badlogic.gdx.graphics.Texture;
+        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+        import com.badlogic.gdx.math.Rectangle;
+        import com.badlogic.gdx.math.Vector2;
 
 public class Obstacle {
     //properties
-    private Vector2 position;
-    private Color color;
-    private char obstacleType;
-    private Texture image;
+    Vector2 position;
+    Texture image;
+
     //methods
 
     public Vector2 getPosition()
@@ -17,26 +17,27 @@ public class Obstacle {
         return position;
     }
 
-    public Color getColor()
-    {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public void setPosition(Vector2 position)
     {
         this.position = position;
     }
 
-    public char getObstacleType()
+    public Texture getImage()
     {
-        return obstacleType;
+        return image;
     }
 
-    public void setObstacleType(char obstacleType) {
-        this.obstacleType = obstacleType;
+    public void setImage(Texture image) {
+        this.image = image;
+    }
+
+    public Rectangle getBoundary()
+    {
+        return new Rectangle(position.x, position.y, image.getWidth(), image.getHeight());
+    }
+
+    public void draw(SpriteBatch batch)
+    {
+        batch.draw(image, position.x, position.y);
     }
 }
