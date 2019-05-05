@@ -18,11 +18,13 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 	final float SWIPE_THRESHOLD = 80;
 	PlainObstacle plObs;
 	boolean isTouching;
+	SpiderSilk silk;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		sp = new SpiderBoi();
+		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		plObs = new PlainObstacle(200, 200);
 		isTouching = false;
@@ -32,7 +34,6 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 
 		if(sp.getBoundary().overlaps(plObs.getBoundary()))
 		{
@@ -52,7 +53,11 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 
 		batch.begin();
 		sp.draw(batch);
-        plObs.draw(batch);
+		silk.addSilkCoords();
+		for(int i = 0; i < silk.getSilkCoords().size(); i ++) {
+			silk.drawSilk(batch, silk.getSilkCoords().get(i).x, silk.getSilkCoords().get(i).y);
+		}
+		plObs.draw(batch);
 		batch.end();
 		sp.move();
 
