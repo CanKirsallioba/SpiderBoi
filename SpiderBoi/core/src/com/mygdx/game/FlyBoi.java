@@ -26,4 +26,6 @@ public class FlyBoi extends Boi {
         spriteBatch.end();
     }
 
+
+
 }
