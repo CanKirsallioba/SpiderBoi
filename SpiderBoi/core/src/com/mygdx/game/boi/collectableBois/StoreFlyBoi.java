@@ -2,7 +2,7 @@ package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.boi.CollectableBoi;
+import com.mygdx.game.boi.collectableBois.*;
 
 /** FlyBois that can be collected and used to purchase skins and backgrounds in the store.
  * @author JavaBoiz
