@@ -1,7 +1,8 @@
-package com.mygdx.game.boi;
+package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.boi.Boi;
 
 public class FlyBoi extends Boi {
 
@@ -11,7 +12,7 @@ public class FlyBoi extends Boi {
     private Texture image;
     int collected;
 
-    public FlyBoi () {
+    public FlyBoi() {
         super();
         spriteBatch = new SpriteBatch();
         image = new Texture("FlyBoi.png");

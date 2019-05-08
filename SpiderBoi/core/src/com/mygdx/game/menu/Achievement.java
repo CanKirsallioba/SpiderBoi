@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.menu;
 
 public abstract class Achievement {
     private String name;

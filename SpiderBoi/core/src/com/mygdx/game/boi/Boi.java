@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Boi {
     //properties
     Vector2 position;
-    Texture image;
+    protected Texture image;
 
     //methods
 
