@@ -1,9 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.boi;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-public class CollectableBoi {
-    import interfaces;
+import com.mygdx.game.interfaces.*;
 
     /** Super class of non-moving and collectable FlyBois.
      * @author JavaBoiz
@@ -25,12 +23,12 @@ public class CollectableBoi {
         // methods
         public void drawCharacter()
         {
-            spriteBatch.begin();
-            spriteBatch.draw( image, 0, 0);
-            spriteBatch.end();
+            cBSpriteBatch.begin();
+            cBSpriteBatch.draw( image, 0, 0);
+            cBSpriteBatch.end();
         }
 
         public void performInteraction() {}
     }
 
-}
+
