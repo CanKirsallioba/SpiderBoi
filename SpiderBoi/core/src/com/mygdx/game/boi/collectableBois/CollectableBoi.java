@@ -13,6 +13,7 @@ public class CollectableBoi extends Boi implements Interactable
 {
     // properties
     SpriteBatch cBSpriteBatch;
+    static int totalFlyBoi; //Need to get total flybois. Somehow...
 
     // constructors
     public CollectableBoi()
@@ -28,6 +29,11 @@ public class CollectableBoi extends Boi implements Interactable
         cBSpriteBatch.draw( image, 0, 0);
         cBSpriteBatch.end();
     }
+
+    public static int getTotalFlyBoi(){
+        return totalFlyBoi;
+    }
+
 
     public void performInteraction() {}
 }

@@ -8,21 +8,21 @@ public class SpiderBoi extends Boi {
     //properties
     private float speed;
     private Vector2 velocity;
-    private Texture SpiderBoiUp;
-    private Texture SpiderBoiDown;
-    private Texture SpiderBoiLeft;
-    private Texture SpiderBoiRight;
+    private Texture spiderBoiUp;
+    private Texture spiderBoiDown;
+    private Texture spiderBoiLeft;
+    private Texture spiderBoiRight;
 
     public SpiderBoi() {
         super();
         speed = 20;
         velocity = new Vector2(speed, 0);
         position = new Vector2(0, 0);
-        SpiderBoiUp = new Texture("SpiderBU.png");
-        SpiderBoiDown = new Texture("SpiderBD.png");
-        SpiderBoiRight = new Texture("SpiderBR.png");
-        SpiderBoiLeft = new Texture("SpiderBL.png");
-        image = SpiderBoiRight;
+        spiderBoiUp = new Texture("SpiderBU.png");
+        spiderBoiDown = new Texture("SpiderBD.png");
+        spiderBoiRight = new Texture("SpiderBR.png");
+        spiderBoiLeft = new Texture("SpiderBL.png");
+        image = spiderBoiRight;
     }
 
     //methods
@@ -48,22 +48,22 @@ public class SpiderBoi extends Boi {
     }
 
     public void moveRight() {
-        image = SpiderBoiRight;
+        image = spiderBoiRight;
         velocity.set(speed, 0);
     }
 
     public void moveLeft() {
-        image = SpiderBoiLeft;
+        image = spiderBoiLeft;
         velocity.set(-speed, 0);
     }
 
     public void moveUp() {
-        image = SpiderBoiUp;
+        image = spiderBoiUp;
         velocity.set(0, speed);
     }
 
     public void moveDown() {
-        image = SpiderBoiDown;
+        image = spiderBoiDown;
         velocity.set(0, -speed);
     }
 
