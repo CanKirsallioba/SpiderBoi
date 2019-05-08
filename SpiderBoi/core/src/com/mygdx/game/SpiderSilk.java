@@ -18,13 +18,14 @@ public class SpiderSilk {
     protected int knotCount;
     private SpiderBoi spiderBoi;
     Texture silk;
+    private ShapeRenderer shapeRenderer;
 
 
     public SpiderSilk (SpiderBoi spB) {
         spiderBoi = spB;
         knotCount = 0;
-        silk = new Texture("silk10.png");
-        silkCoords = new ArrayList<Vector2>();
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
     }
 
     //methods
@@ -48,8 +49,29 @@ public class SpiderSilk {
         return knotCount;
     }
 
-    public void drawSilk(SpriteBatch batch, float x, float y)
+    public void drawSilk()
     {
-        batch.draw(silk, x, y);
+        if(spiderBoi.getVelocity().x == 0 && spiderBoi.getVelocity().y == 0)
+        {
+            spiderBoi.setOnObstacle(true);
+            spiderBoi.addStopLocations(spiderBoi.getPosition());
+        }
+        else {
+            spiderBoi.setOnObstacle(false);
+        }
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0, 0, 0, 1);
+
+        if(spiderBoi.getStopLocations().size() > 2) {
+            for (int i = 0; i < spiderBoi.getStopLocations().size() - 1; i++) {
+                shapeRenderer.rectLine(spiderBoi.getStopLocations().get(i), spiderBoi.getStopLocations().get(i + 1), 10);
+            }
+        }
+
+
+        shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
+                spiderBoi.getPosition(), 10);
+        shapeRenderer.end();
     }
 }

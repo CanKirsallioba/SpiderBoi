@@ -3,6 +3,8 @@ package com.mygdx.game.boi;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+
 public class SpiderBoi extends Boi {
 
     //properties
@@ -12,6 +14,8 @@ public class SpiderBoi extends Boi {
     private Texture spiderBoiDown;
     private Texture spiderBoiLeft;
     private Texture spiderBoiRight;
+    private boolean onObstacle;
+    ArrayList<Vector2> stopLocations;
 
     public SpiderBoi() {
         super();
@@ -23,6 +27,8 @@ public class SpiderBoi extends Boi {
         spiderBoiRight = new Texture("SpiderBR.png");
         spiderBoiLeft = new Texture("SpiderBL.png");
         image = spiderBoiRight;
+        onObstacle = false;
+        stopLocations = new ArrayList<Vector2>();
     }
 
     //methods
@@ -67,10 +73,19 @@ public class SpiderBoi extends Boi {
         velocity.set(0, -speed);
     }
 
-    //public Vector2 getLastVelocity()
-    //{
-    //    return lastVelocity;
-    //}
+    public boolean isOnObstacle() {
+        return onObstacle;
+    }
 
+    public void setOnObstacle(boolean onObstacle) {
+        this.onObstacle = onObstacle;
+    }
 
+    public ArrayList<Vector2> getStopLocations() {
+        return stopLocations;
+    }
+
+    public void addStopLocations(Vector2 stopLocation) {
+        stopLocations.add(stopLocation);
+    }
 }

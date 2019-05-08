@@ -55,11 +55,12 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 
 		batch.begin();
 		sp.draw(batch);
-		silk.addSilkCoords();
-		for(int i = 0; i < silk.getSilkCoords().size(); i ++) {
-			silk.drawSilk(batch, silk.getSilkCoords().get(i).x, silk.getSilkCoords().get(i).y);
-		}
+		//silk.addSilkCoords();
+		//for(int i = 0; i < silk.getSilkCoords().size(); i ++) {
+		//	silk.drawSilk(batch, silk.getSilkCoords().get(i).x, silk.getSilkCoords().get(i).y);
+		//}
 		plObs.draw(batch);
+		//silk.drawSilk();
 		batch.end();
 		sp.move();
 
