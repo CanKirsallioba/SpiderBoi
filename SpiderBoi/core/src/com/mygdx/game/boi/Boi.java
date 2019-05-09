@@ -32,6 +32,11 @@ public class Boi {
         return new Rectangle(position.x, position.y, image.getWidth(), image.getHeight());
     }
 
+    public Vector2 getHalfSize()
+    {
+        return new Vector2(image.getWidth()/2, image.getHeight()/2);
+    }
+
     public void setImage(Texture image) {
         this.image = image;
     }

@@ -14,10 +14,8 @@ public class SpiderSilk {
 
     //properties
 
-    private ArrayList<Vector2> silkCoords;
-    protected int knotCount;
+    private int knotCount;
     private SpiderBoi spiderBoi;
-    Texture silk;
     private ShapeRenderer shapeRenderer;
 
 
@@ -25,45 +23,35 @@ public class SpiderSilk {
         spiderBoi = spB;
         knotCount = 0;
         shapeRenderer = new ShapeRenderer();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
     }
 
     //methods
 
-    public ArrayList<Vector2> getSilkCoords() {
-        return silkCoords;
-    }
 
-    public void addSilkCoords()
-    {
-        silkCoords.add(spiderBoi.getPosition());
-    }
 
-    public int checkKnot () {
+    //public int checkKnot () {
 
-        for (int i = 0; i < silkCoords.size() ; i++) {
-            if (silkCoords.get(i) == spiderBoi.getPosition()) {
-                knotCount ++;
-            }
-        }
-        return knotCount;
-    }
+    //    for (int i = 0; i < silkCoords.size() ; i++) {
+    //        if (silkCoords.get(i) == spiderBoi.getPosition()) {
+    //           knotCount ++;
+    //       }
+    //   }
+    //    return knotCount;
+    //}
 
     public void drawSilk()
     {
-        if(spiderBoi.getVelocity().x == 0 && spiderBoi.getVelocity().y == 0)
+        if(spiderBoi.isOnObstacle())
         {
-            spiderBoi.setOnObstacle(true);
-            spiderBoi.addStopLocations(spiderBoi.getPosition());
-        }
-        else {
+            spiderBoi.getStopLocations().add(spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()));
             spiderBoi.setOnObstacle(false);
         }
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, 1);
 
-        if(spiderBoi.getStopLocations().size() > 2) {
+
+        if(spiderBoi.getStopLocations().size() > 1) {
             for (int i = 0; i < spiderBoi.getStopLocations().size() - 1; i++) {
                 shapeRenderer.rectLine(spiderBoi.getStopLocations().get(i), spiderBoi.getStopLocations().get(i + 1), 10);
             }
@@ -71,7 +59,7 @@ public class SpiderSilk {
 
 
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
-                spiderBoi.getPosition(), 10);
+                spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
         shapeRenderer.end();
     }
 }

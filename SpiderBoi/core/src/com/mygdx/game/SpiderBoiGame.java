@@ -10,7 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.*;
 import com.mygdx.game.obstacles.*;
-
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import java.util.Vector;
 
 public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor {
@@ -21,6 +25,7 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 	PlainObstacle plObs;
 	boolean isTouching;
 	SpiderSilk silk;
+	Level gameLevel;
 
 	@Override
 	public void create () {
@@ -28,8 +33,9 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 		sp = new SpiderBoi();
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
-		plObs = new PlainObstacle(200, 200);
 		isTouching = false;
+		gameLevel = new Level(1);
+		gameLevel.showLevel(sp);
 	}
 
 	@Override
@@ -37,7 +43,7 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if(sp.getBoundary().overlaps(plObs.getBoundary()))
+		/*if(sp.getBoundary().overlaps(plObs.getBoundary()))
 		{
 			Vector2 reverseVel = sp.getVelocity().scl(-1);
 			while(sp.getBoundary().overlaps(plObs.getBoundary())) {
@@ -45,27 +51,33 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 				sp.move();
 			}
 			sp.getVelocity().setZero();
+			sp.onObstacle = true;
 
-        }
-
-        if (sp.getPosition().x > Gdx.graphics.getWidth() || sp.getPosition().x < 0
-		|| sp.getPosition().y > Gdx.graphics.getHeight() || sp.getPosition().y < 0) {
-			sp.getVelocity().setZero();
 		}
 
+		if (sp.getPosition().x > Gdx.graphics.getWidth() || sp.getPosition().x < 0
+				|| sp.getPosition().y > Gdx.graphics.getHeight() || sp.getPosition().y < 0) {
+			sp.getVelocity().setZero();
+		}*/
+
+
+
 		batch.begin();
+		for (int i = 0; i < gameLevel.obstacles.size(); i++)
+		{
+			gameLevel.obstacles.get(i).draw(batch);
+			gameLevel.obstacles.get(i).checkCollision(sp);
+
+		}
 		sp.draw(batch);
-		//silk.addSilkCoords();
-		//for(int i = 0; i < silk.getSilkCoords().size(); i ++) {
-		//	silk.drawSilk(batch, silk.getSilkCoords().get(i).x, silk.getSilkCoords().get(i).y);
-		//}
-		plObs.draw(batch);
-		//silk.drawSilk();
 		batch.end();
+
+		silk.drawSilk();
+
 		sp.move();
 
-}
-	
+	}
+
 	@Override
 	public void dispose () {
 		batch.dispose();

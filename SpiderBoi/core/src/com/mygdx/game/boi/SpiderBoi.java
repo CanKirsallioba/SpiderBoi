@@ -5,87 +5,93 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
-public class SpiderBoi extends Boi {
+    public class SpiderBoi extends Boi {
 
-    //properties
-    private float speed;
-    private Vector2 velocity;
-    private Texture spiderBoiUp;
-    private Texture spiderBoiDown;
-    private Texture spiderBoiLeft;
-    private Texture spiderBoiRight;
-    private boolean onObstacle;
-    ArrayList<Vector2> stopLocations;
+        //properties
+        private float speed;
+        private Vector2 velocity;
+        private Texture SpiderBoiUp;
+        private Texture SpiderBoiDown;
+        private Texture SpiderBoiLeft;
+        private Texture SpiderBoiRight;
+        boolean onObstacle;
+        ArrayList<Vector2> stopLocations;
 
-    public SpiderBoi() {
-        super();
-        speed = 20;
-        velocity = new Vector2(speed, 0);
-        position = new Vector2(0, 0);
-        spiderBoiUp = new Texture("SpiderBU.png");
-        spiderBoiDown = new Texture("SpiderBD.png");
-        spiderBoiRight = new Texture("SpiderBR.png");
-        spiderBoiLeft = new Texture("SpiderBL.png");
-        image = spiderBoiRight;
-        onObstacle = false;
-        stopLocations = new ArrayList<Vector2>();
+        public SpiderBoi() {
+            super();
+            speed = 0;
+            velocity = new Vector2(0, 0);
+            position = new Vector2(0, 0);
+            SpiderBoiUp = new Texture("SpiderBU.png");
+            SpiderBoiDown = new Texture("SpiderBD.png");
+            SpiderBoiRight = new Texture("SpiderBR.png");
+            SpiderBoiLeft = new Texture("SpiderBL.png");
+            stopLocations = new ArrayList<Vector2>();
+            image = SpiderBoiRight;
+            onObstacle = true;
+        }
+
+        //methods
+        public boolean isOnObstacle() {
+            return onObstacle;
+        }
+
+        public void setOnObstacle(boolean onObstacle) {
+            this.onObstacle = onObstacle;
+        }
+
+        public ArrayList<Vector2> getStopLocations() {
+            return stopLocations;
+        }
+
+        public void setStopLocations(ArrayList<Vector2> stopLocations) {
+            this.stopLocations = stopLocations;
+        }
+
+        public double getSpeed() {
+            return speed;
+        }
+
+        public Vector2 getVelocity() {
+            return velocity;
+        }
+
+        public void setSpeed(float speed) {
+            this.speed = speed;
+        }
+
+        public void setVelocity(Vector2 velocity) {
+            this.velocity = velocity;
+        }
+
+        public void move() {
+            position = position.add(velocity);
+        }
+
+        public void moveRight() {
+            image = SpiderBoiRight;
+            velocity.set(20, 0);
+        }
+
+        public void moveLeft() {
+            image = SpiderBoiLeft;
+            velocity.set(-20, 0);
+        }
+
+        public void moveUp() {
+            image = SpiderBoiUp;
+            velocity.set(0, 20);
+        }
+
+        public void moveDown() {
+            image = SpiderBoiDown;
+            velocity.set(0, -20);
+        }
+
+        //public Vector2 getLastVelocity()
+        //{
+        //    return lastVelocity;
+        //}
+
+
     }
-
-    //methods
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public Vector2 getVelocity() {
-        return velocity;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
-    public void setVelocity(Vector2 velocity) {
-        this.velocity = velocity;
-    }
-
-    public void move() {
-        position = position.add(velocity);
-    }
-
-    public void moveRight() {
-        image = spiderBoiRight;
-        velocity.set(speed, 0);
-    }
-
-    public void moveLeft() {
-        image = spiderBoiLeft;
-        velocity.set(-speed, 0);
-    }
-
-    public void moveUp() {
-        image = spiderBoiUp;
-        velocity.set(0, speed);
-    }
-
-    public void moveDown() {
-        image = spiderBoiDown;
-        velocity.set(0, -speed);
-    }
-
-    public boolean isOnObstacle() {
-        return onObstacle;
-    }
-
-    public void setOnObstacle(boolean onObstacle) {
-        this.onObstacle = onObstacle;
-    }
-
-    public ArrayList<Vector2> getStopLocations() {
-        return stopLocations;
-    }
-
-    public void addStopLocations(Vector2 stopLocation) {
-        stopLocations.add(stopLocation);
-    }
-}
