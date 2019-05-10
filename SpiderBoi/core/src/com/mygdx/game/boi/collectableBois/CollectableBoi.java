@@ -30,7 +30,10 @@ public class CollectableBoi extends Boi implements Interactable
 
     // methods
 
-
+    /**
+     * This method draws the character by using the spriteBatch
+     * begin(), draw(), and end() methods.
+     */
     public void drawCharacter()
     {
         cBSpriteBatch.begin();
@@ -38,6 +41,10 @@ public class CollectableBoi extends Boi implements Interactable
         cBSpriteBatch.end();
     }
 
+    /**
+     * This method gets the total flyBoi count for the store.
+     * @return the total number of the flyBoi's.
+     */
     public static int getTotalFlyBoi(){
         return totalFlyBoi;
     }

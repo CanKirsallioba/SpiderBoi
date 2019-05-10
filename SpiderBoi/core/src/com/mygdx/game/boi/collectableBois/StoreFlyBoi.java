@@ -15,6 +15,12 @@ public class StoreFlyBoi extends CollectableBoi
     Texture image;
 
     // constructors
+
+    /**
+     * This is the constructor for the StoreFlyBoi class.
+     * Calls the parent constructor and initialises the position.
+     * @param position is the initial position of the flyBoi.
+     */
     public StoreFlyBoi(Vector2 position)
     {
         super();
@@ -24,11 +30,20 @@ public class StoreFlyBoi extends CollectableBoi
     }
 
     // methods
+
+    /**
+     * This method gets the position of the flyBoi.
+     * @return the position in Vector2 type.
+     */
     public Vector2 getPosition()
     {
         return sFBPosition;
     }
 
+    /**
+     * This method sets the position in Vector2 form.
+     * @param position is the position to be set.
+     */
     public void setPosition( Vector2 position)
     {
         sFBPosition = position;
