@@ -116,15 +116,16 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 		if(newTouch.cpy().sub(lastTouch).len()<SWIPE_THRESHOLD)
 			return false;
 		float angle = newTouch.cpy().sub(lastTouch).angle();
-		if(angle < 45 || angle > 315)
+		if((angle < 45 || angle > 315) && sp.getVelocity().isZero())
 			sp.moveRight();
-		if(angle > 45 && angle < 135)
+		if((angle > 45 && angle < 135) && sp.getVelocity().isZero())
 			sp.moveDown();
-		if(angle > 135 && angle < 225)
+		if((angle > 135 && angle < 225) && sp.getVelocity().isZero())
 			sp.moveLeft();
-		if(angle > 225 && angle < 315)
+		if((angle > 225 && angle < 315) && sp.getVelocity().isZero())
 			sp.moveUp();
-		sp.move();
+		if (sp.getVelocity().isZero())
+			sp.move();
 		return true;
 	}
 
