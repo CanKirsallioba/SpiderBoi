@@ -5,6 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.boi.collectableBois.CollectableBoi;
+import com.mygdx.game.boi.collectableBois.ImmunityFlyBoi;
+import com.mygdx.game.boi.collectableBois.KnotFlyBoi;
 import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 import com.mygdx.game.obstacles.Obstacle;
 import com.mygdx.game.obstacles.PlainObstacle;
@@ -76,8 +78,16 @@ public class Level {
                 collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
                         Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
-
-
+            else if(objectType.equals("ifb"))
+            {
+                collectableBois.add(new ImmunityFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+            }
+            else if(objectType.equals("kfb"))
+            {
+                collectableBois.add(new KnotFlyBoi(((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100),
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+            }
         }
     }
 

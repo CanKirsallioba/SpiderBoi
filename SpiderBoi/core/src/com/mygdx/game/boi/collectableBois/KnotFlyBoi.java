@@ -18,6 +18,10 @@ public class KnotFlyBoi extends CollectableBoi {
     @Override
     public void performInteraction(SpiderBoi spiderBoi)
     {
-        //todo
+        if (spiderBoi.getBoundary().overlaps(getBoundary()))
+        {
+            setPresent(false);
+            //todo
+        }
     }
 }

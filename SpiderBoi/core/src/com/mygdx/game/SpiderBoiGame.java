@@ -34,7 +34,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
-		gameLevel = new Level(1);
+		gameLevel = new Level(2);
 		gameLevel.showLevel(sp);
 	}
 
