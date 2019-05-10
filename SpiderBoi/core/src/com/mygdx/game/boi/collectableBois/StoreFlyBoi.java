@@ -11,7 +11,7 @@ import com.mygdx.game.boi.collectableBois.*;
  */
 public class StoreFlyBoi extends CollectableBoi
 {
-    static int totalFlyBoi = 0; //Need to get total flybois. Somehow...
+    static int totalFlyBoi = 0;
     // constructors
     /**
      * This is the constructor for the StoreFlyBoi class.
@@ -39,7 +39,7 @@ public class StoreFlyBoi extends CollectableBoi
      * This method gets the total flyBoi count for the store.
      * @return the total number of the flyBoi's.
      */
-    public static int getTotalFlyBoi(){
+    public static int getTotalFlyBoi() {
         return totalFlyBoi;
     }
 }

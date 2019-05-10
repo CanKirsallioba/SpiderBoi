@@ -57,7 +57,7 @@ public class SpiderSilk {
         }
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, 1);
+        shapeRenderer.setColor(1, 1, 1, 1);
 
 
         if(spiderBoi.getStopLocations().size() > 1) {
