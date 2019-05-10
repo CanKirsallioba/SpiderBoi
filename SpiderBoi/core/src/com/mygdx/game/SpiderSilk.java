@@ -75,14 +75,17 @@ public class SpiderSilk {
             }
         }
 
+        /*
         for (int i = 0; i < silkList.size() -1; i++) {
             for (int j = 0; j < silkList.size() -1; j++) {
-                 if (i == j) {
+                 if (i == j) {                                 TO BE FIXED!!! THIS IMPLEMENTATION IS WRONG
                      j++;
-                     
+                     silkList.get(i)
+
                  }
             }
         }
+        */
 
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
