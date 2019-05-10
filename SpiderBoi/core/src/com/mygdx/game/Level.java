@@ -21,6 +21,12 @@ public class Level {
     FileHandle levelFile;
 
     //constructor
+
+    /**
+     * Constructor for the level class it reads the .txt file located int he assests
+     * folder for the locations of the entities, creates an arraylist for obstacles.
+     * @param levelNo is the level number of the which is also the name of the .txt file.
+     */
     public Level(int levelNo)
     {
         FileHandle levelFile = Gdx.files.internal("1.txt");
@@ -30,6 +36,12 @@ public class Level {
     }
 
     //methods
+
+    /**
+     * This method scans the .txt file and puts the related objects in the given positions
+     * @param spiderBoi is the main character of the game since it will interact with the environment it is
+     *                  taken as a parameter.
+     */
     public void showLevel(SpiderBoi spiderBoi)
     {
         while(mapScan.hasNext())

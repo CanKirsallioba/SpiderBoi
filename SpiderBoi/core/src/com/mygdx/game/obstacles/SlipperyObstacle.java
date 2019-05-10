@@ -7,6 +7,11 @@ public class SlipperyObstacle extends Obstacle {
 
     //properties
     //constructor
+    /**
+     * Constructor for the slippery obstacle, calls the parent constructor, it also initialises the image and the coordinates.
+     * @param x is the x coordinate of the obstacle.
+     * @param y is the y coordinate of the obstacle.
+     */
     public SlipperyObstacle(int x, int y)
     {
         super();
