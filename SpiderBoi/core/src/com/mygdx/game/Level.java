@@ -32,7 +32,7 @@ public class Level {
      */
     public Level(int levelNo)
     {
-        FileHandle levelFile = Gdx.files.internal("1.txt");
+        FileHandle levelFile = Gdx.files.internal(levelNo + ".txt");
         this.levelNo = levelNo;
         obstacles = new ArrayList<Obstacle>();
         collectableBois = new ArrayList<CollectableBoi>();
@@ -53,24 +53,30 @@ public class Level {
             String objectType = mapScan.next();
             if(objectType.equals("pl"))
             {
-                obstacles.add(new PlainObstacle(Integer.parseInt(mapScan.next()), Integer.parseInt(mapScan.next())));
+                obstacles.add(new PlainObstacle(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("sl"))
             {
-                obstacles.add(new SlipperyObstacle(Integer.parseInt(mapScan.next()), Integer.parseInt(mapScan.next())));
+                obstacles.add(new SlipperyObstacle(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("sk"))
             {
-                obstacles.add(new SpikyObstacle((Integer.parseInt(mapScan.next())), Integer.parseInt(mapScan.next())));
+                obstacles.add(new SpikyObstacle((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("sp"))
             {
-                spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next()), Integer.parseInt(mapScan.next())));
+                spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("sfb"))
             {
-                collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next())), Integer.parseInt(mapScan.next())));
+                collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
+
 
         }
     }
