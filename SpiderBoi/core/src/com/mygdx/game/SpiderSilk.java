@@ -67,10 +67,20 @@ public class SpiderSilk {
                 if (spiderBoi.getStopLocations().get(i).y == spiderBoi.getStopLocations().get(i + 1).y)
                     silkList.add(new Rectangle(spiderBoi.getStopLocations().get(i).x, spiderBoi.getStopLocations().get(i).y,
                             Math.abs(spiderBoi.getStopLocations().get(i + 1).x - spiderBoi.getStopLocations().get(i).x), 10));
+
                 else if (spiderBoi.getStopLocations().get(i).x == spiderBoi.getStopLocations().get(i + 1).x) {
                     silkList.add(new Rectangle(spiderBoi.getStopLocations().get(i).x, spiderBoi.getStopLocations().get(i).y,
                             10, Math.abs(spiderBoi.getStopLocations().get(i + 1).y - spiderBoi.getStopLocations().get(i).y)));
                 }
+            }
+        }
+
+        for (int i = 0; i < silkList.size() -1; i++) {
+            for (int j = 0; j < silkList.size() -1; j++) {
+                 if (i == j) {
+                     j++;
+                     
+                 }
             }
         }
 
