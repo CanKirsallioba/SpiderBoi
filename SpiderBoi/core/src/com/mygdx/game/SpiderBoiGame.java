@@ -72,6 +72,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		for (int i = 0; i < gameLevel.collectableBois.size(); i++)
 		{
 			gameLevel.collectableBois.get(i).draw(batch);
+			gameLevel.collectableBois.get(i).performInteraction(sp);
 		}
 		sp.draw(batch);
 		batch.end();

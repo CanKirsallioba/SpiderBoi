@@ -28,7 +28,11 @@ public class StoreFlyBoi extends CollectableBoi
     @Override
     public void performInteraction(SpiderBoi spiderBoi)
     {
-        if (spiderBoi.getBoundary().overlaps())
+        if (spiderBoi.getBoundary().overlaps(getBoundary()))
+        {
+            this = null;
+            totalFlyBoi++;
+        }
     }
 
     /**
