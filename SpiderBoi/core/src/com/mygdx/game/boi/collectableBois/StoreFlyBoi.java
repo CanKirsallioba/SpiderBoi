@@ -30,7 +30,7 @@ public class StoreFlyBoi extends CollectableBoi
     {
         if (spiderBoi.getBoundary().overlaps(getBoundary()))
         {
-            this = null;
+            setPresent(false);
             totalFlyBoi++;
         }
     }
