@@ -17,12 +17,15 @@ public class SpiderSilk {
     private int knotCount;
     private SpiderBoi spiderBoi;
     private ShapeRenderer shapeRenderer;
+    ArrayList <Rectangle> silkList;
+
 
 
     public SpiderSilk (SpiderBoi spB) {
         spiderBoi = spB;
         knotCount = 0;
         shapeRenderer = new ShapeRenderer();
+        silkList = new ArrayList <Rectangle>();
     }
 
     //methods
@@ -54,12 +57,21 @@ public class SpiderSilk {
         if(spiderBoi.getStopLocations().size() > 1) {
             for (int i = 0; i < spiderBoi.getStopLocations().size() - 1; i++) {
                 shapeRenderer.rectLine(spiderBoi.getStopLocations().get(i), spiderBoi.getStopLocations().get(i + 1), 10);
+
+                if (spiderBoi.getStopLocations().get(i).y == spiderBoi.getStopLocations().get(i + 1).y)
+                    silkList.add(new Rectangle(spiderBoi.getStopLocations().get(i).x, spiderBoi.getStopLocations().get(i).y,
+                            Math.abs(spiderBoi.getStopLocations().get(i + 1).x - spiderBoi.getStopLocations().get(i).x), 10));
+                else if (spiderBoi.getStopLocations().get(i).x == spiderBoi.getStopLocations().get(i + 1).x) {
+                    silkList.add(new Rectangle(spiderBoi.getStopLocations().get(i).x, spiderBoi.getStopLocations().get(i).y,
+                            10, Math.abs(spiderBoi.getStopLocations().get(i + 1).y - spiderBoi.getStopLocations().get(i).y)));
+                }
             }
         }
-
 
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
         shapeRenderer.end();
+
+
     }
 }
