@@ -32,7 +32,7 @@ public class Level {
      */
     public Level(int levelNo)
     {
-        FileHandle levelFile = Gdx.files.internal("1.txt");
+        FileHandle levelFile = Gdx.files.internal(levelNo + ".txt");
         this.levelNo = levelNo;
         obstacles = new ArrayList<Obstacle>();
         collectableBois = new ArrayList<CollectableBoi>();
