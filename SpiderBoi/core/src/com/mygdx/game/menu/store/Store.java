@@ -1,6 +1,7 @@
 package com.mygdx.game.menu.store;
 
 import com.mygdx.game.boi.collectableBois.CollectableBoi;
+import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Store {
     ArrayList<SpiderBoiBackground> spiderBoiBackgroundUnlockedList;
     SpiderBoiSkin selectedSpiderBoiSkin;
     SpiderBoiBackground selectedSpiderBoiBackground;
-    CollectableBoi collectableBoi;
+    StoreFlyBoi storeFlyBoi;
     SpiderBoiSkin spiderBoiSkin;
     int remainingFlyBoi;
 
@@ -21,26 +22,25 @@ public class Store {
         SpiderBoiSkin target = spiderBoiSkinList.get(index);
         if (!target.isUnlocked()) {
             if (target.canUnlock()) {
-                remainingFlyBoi = collectableBoi.getTotalFlyBoi();
+                remainingFlyBoi = storeFlyBoi.getTotalFlyBoi();
                 remainingFlyBoi = remainingFlyBoi - target.getCost();
                 target.unlock();
+                selectedSpiderBoiSkin = target;
                 spiderBoiSkinUnlockedList.add(target);
             }
         }
-
     }
 
     public void buySBBackground(int index) {
         SpiderBoiBackground target = spiderBoiBackgroundList.get(index);
         if (!target.isUnlocked()) {
             if (target.canUnlock()) {
-                remainingFlyBoi = collectableBoi.getTotalFlyBoi();
+                remainingFlyBoi = storeFlyBoi.getTotalFlyBoi();
                 remainingFlyBoi = remainingFlyBoi - target.getCost();
                 target.unlock();
+                selectedSpiderBoiBackground = target;
                 spiderBoiBackgroundUnlockedList.add(target);
             }
         }
-
-
     }
 }

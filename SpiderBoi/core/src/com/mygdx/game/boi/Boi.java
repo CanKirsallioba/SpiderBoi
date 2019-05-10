@@ -5,13 +5,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Boi {
+public abstract class Boi {
     //properties
-    Vector2 position;
-    protected Texture image;
+    private Vector2 position;
+    private Texture image;
+
+    //constructors
+    public Boi(String fileName) {
+        image = new Texture(fileName);
+        position = new Vector2(0,0);
+    }
 
     //methods
-
     /**
      * This method gets the position of the Boi object.
      * @return the position in vector2 type.

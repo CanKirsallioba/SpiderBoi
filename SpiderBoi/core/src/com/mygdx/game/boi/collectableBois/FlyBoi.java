@@ -2,20 +2,20 @@ package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.Boi;
+import com.mygdx.game.boi.SpiderBoi;
 
-public class FlyBoi extends Boi {
+public abstract class FlyBoi extends Boi {
 
     //Properties
-
     SpriteBatch spriteBatch;
-    private Texture image;
-    int collected;
+    protected Texture image;
 
-    public FlyBoi() {
-        super();
+    public FlyBoi(String fileName, int x, int y) {
+        super(fileName);
+        setPosition(new Vector2(x, y));
         spriteBatch = new SpriteBatch();
-        image = new Texture("FlyBoi.png");
     }
 
     //Methods
@@ -27,6 +27,5 @@ public class FlyBoi extends Boi {
         spriteBatch.end();
     }
 
-
-
+    public abstract void performInteraction(SpiderBoi spiderBoi);
 }

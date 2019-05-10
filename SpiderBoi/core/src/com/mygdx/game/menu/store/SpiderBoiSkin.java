@@ -2,7 +2,7 @@ package com.mygdx.game.menu.store;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.boi.*;
-import com.mygdx.game.boi.collectableBois.CollectableBoi;
+import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 
 /**
  * SpiderBoi skin class
@@ -26,7 +26,7 @@ public class SpiderBoiSkin {
     }
 
     public boolean canUnlock() {
-        if (CollectableBoi.getTotalFlyBoi() >= cost && !isUnlocked) {
+        if (StoreFlyBoi.getTotalFlyBoi() >= cost && !isUnlocked) {
             return true;
         }
 

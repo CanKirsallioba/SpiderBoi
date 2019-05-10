@@ -17,7 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import java.util.Vector;
 
-public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor {
+public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch batch;
 	SpiderBoi sp;
 	private Vector2 lastTouch;
@@ -30,7 +30,7 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		sp = new SpiderBoi();
+		sp = new SpiderBoi("SpiderBD.jpeg");
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
@@ -68,6 +68,10 @@ public class SpiderBoiGame extends ApplicationAdapter  implements InputProcessor
 			gameLevel.obstacles.get(i).draw(batch);
 			gameLevel.obstacles.get(i).checkCollision(sp);
 
+		}
+		for (int i = 0; i < gameLevel.collectableBois.size(); i++)
+		{
+			gameLevel.collectableBois.get(i).draw(batch);
 		}
 		sp.draw(batch);
 		batch.end();

@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
+import com.mygdx.game.boi.collectableBois.CollectableBoi;
+import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 import com.mygdx.game.obstacles.Obstacle;
 import com.mygdx.game.obstacles.PlainObstacle;
 import com.mygdx.game.obstacles.SlipperyObstacle;
@@ -18,6 +20,7 @@ public class Level {
     Scanner mapScan;
     int levelNo;
     ArrayList<Obstacle> obstacles;
+    ArrayList<CollectableBoi> collectableBois;
     FileHandle levelFile;
 
     //constructor
@@ -32,6 +35,7 @@ public class Level {
         FileHandle levelFile = Gdx.files.internal("1.txt");
         this.levelNo = levelNo;
         obstacles = new ArrayList<Obstacle>();
+        collectableBois = new ArrayList<CollectableBoi>();
         mapScan = new Scanner(levelFile.readString());
     }
 
@@ -62,6 +66,10 @@ public class Level {
             else if(objectType.equals("sp"))
             {
                 spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next()), Integer.parseInt(mapScan.next())));
+            }
+            else if(objectType.equals("sfb"))
+            {
+                collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next())), Integer.parseInt(mapScan.next())));
             }
 
         }

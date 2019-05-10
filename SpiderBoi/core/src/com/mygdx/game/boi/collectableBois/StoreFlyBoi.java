@@ -2,6 +2,7 @@ package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.boi.collectableBois.*;
 
 /** FlyBois that can be collected and used to purchase skins and backgrounds in the store.
@@ -10,51 +11,32 @@ import com.mygdx.game.boi.collectableBois.*;
  */
 public class StoreFlyBoi extends CollectableBoi
 {
-    // properties
-    Vector2 sFBPosition;
-    Texture image;
-
+    static int totalFlyBoi = 0; //Need to get total flybois. Somehow...
     // constructors
-
     /**
      * This is the constructor for the StoreFlyBoi class.
      * Calls the parent constructor and initialises the position.
-     * @param position is the initial position of the flyBoi.
+     * @param x is the initial x coordinate of the StoreFlyBoi
+     * @param y is the initial y coordinate of the StoreFlyBoi
      */
-    public StoreFlyBoi(Vector2 position)
+    public StoreFlyBoi(int x, int y)
     {
-        super();
-
-//    image.setImage( "image_String.png");
-        sFBPosition = position;
+        super("flyBoi.png", x, y);
     }
 
     // methods
-
-    /**
-     * This method gets the position of the flyBoi.
-     * @return the position in Vector2 type.
-     */
-    public Vector2 getPosition()
-    {
-        return sFBPosition;
-    }
-
-    /**
-     * This method sets the position in Vector2 form.
-     * @param position is the position to be set.
-     */
-    public void setPosition( Vector2 position)
-    {
-        sFBPosition = position;
-    }
-
     @Override
-    public void performInteraction()
+    public void performInteraction(SpiderBoi spiderBoi)
     {
-        // Increase the static property (in the game loop) countStoreFlyBoi by 1.
-        //this.dispose();
-        //todo add method
+        if (spiderBoi.getBoundary().overlaps())
+    }
+
+    /**
+     * This method gets the total flyBoi count for the store.
+     * @return the total number of the flyBoi's.
+     */
+    public static int getTotalFlyBoi(){
+        return totalFlyBoi;
     }
 }
 

@@ -1,7 +1,7 @@
 package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.boi.Boi;
+import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.interfaces.Interactable;
 
 /** Super class of non-moving and collectable FlyBois.
@@ -9,11 +9,10 @@ import com.mygdx.game.interfaces.Interactable;
  * @version 0.1 on 09.05.2019
  */
 
-public class CollectableBoi extends Boi implements Interactable
+public abstract class CollectableBoi extends FlyBoi implements Interactable
 {
     // properties
     SpriteBatch cBSpriteBatch;
-    static int totalFlyBoi; //Need to get total flybois. Somehow...
 
     // constructors
 
@@ -22,9 +21,9 @@ public class CollectableBoi extends Boi implements Interactable
      * parent constructor, interactable interface and creates an
      * instance of cBSpriteBatch.
      */
-    public CollectableBoi()
+    public CollectableBoi(String fileName, int x, int y)
     {
-        super();
+        super(fileName, x, y);
         cBSpriteBatch = new SpriteBatch();
     }
 
@@ -34,23 +33,13 @@ public class CollectableBoi extends Boi implements Interactable
      * This method draws the character by using the spriteBatch
      * begin(), draw(), and end() methods.
      */
-    public void drawCharacter()
-    {
+    public void drawCharacter() {
         cBSpriteBatch.begin();
-        cBSpriteBatch.draw( image, 0, 0);
+        cBSpriteBatch.draw(image, 0, 0);
         cBSpriteBatch.end();
     }
 
-    /**
-     * This method gets the total flyBoi count for the store.
-     * @return the total number of the flyBoi's.
-     */
-    public static int getTotalFlyBoi(){
-        return totalFlyBoi;
-    }
-
-
-    public void performInteraction() {}
+    public abstract void performInteraction(SpiderBoi spiderBoi);
 }
 
 
