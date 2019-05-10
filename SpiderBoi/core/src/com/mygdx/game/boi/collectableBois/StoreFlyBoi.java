@@ -21,7 +21,7 @@ public class StoreFlyBoi extends CollectableBoi
      */
     public StoreFlyBoi(int x, int y)
     {
-        super("flyBoi.png", x, y);
+        super("storeFlyBoi.png", x, y);
     }
 
     // methods

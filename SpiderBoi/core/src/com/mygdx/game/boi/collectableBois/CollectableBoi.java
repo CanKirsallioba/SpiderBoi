@@ -1,8 +1,9 @@
 package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.interfaces.Interactable;
+import com.mygdx.game.boi.FlyBoi;
+import com.mygdx.game.boi.SpiderBoi;
 
 /** Super class of non-moving and collectable FlyBois.
  * @author JavaBoiz
