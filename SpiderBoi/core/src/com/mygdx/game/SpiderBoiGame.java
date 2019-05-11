@@ -4,10 +4,15 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.boi.*;
 import com.mygdx.game.obstacles.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -26,9 +31,13 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	boolean isTouching;
 	SpiderSilk silk;
 	Level gameLevel;
+	int totalKnot = 0;
+	private Stage stage;
+	Label label1;
 
 	@Override
 	public void create () {
+		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
 		silk = new SpiderSilk(sp);
@@ -36,6 +45,13 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		isTouching = false;
 		gameLevel = new Level(2);
 		gameLevel.showLevel(sp);
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
+		labelStyle.fontColor = Color.PURPLE;
+		label1 = new Label("Knots : " + totalKnot + " out of " + "3", labelStyle);
+		label1.setPosition(0, Gdx.graphics.getWidth() / 16);
+		label1.setAlignment(Align.topLeft);
+		stage.addActor(label1);
+
 	}
 
 	@Override
@@ -80,6 +96,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		batch.end();
 
 		silk.drawSilk();
+		if (silk.checkKnot() != 0) {
+			totalKnot = silk.checkKnot();
+		}
+		label1.setText("Knots : " + totalKnot + " out of " + "3");
 
 		sp.move();
 

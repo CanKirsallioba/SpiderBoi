@@ -34,15 +34,17 @@ public class SpiderSilk {
 
 
 
-    //public int checkKnot () {
-
-    //    for (int i = 0; i < silkCoords.size() ; i++) {
-    //        if (silkCoords.get(i) == spiderBoi.getPosition()) {
-    //           knotCount ++;
-    //       }
-    //   }
-    //    return knotCount;
-    //}
+    public int checkKnot () {
+        int count = 0;
+        for (int i = 0; i < silkList.size() -1; i++) {
+            for (int j = 0; j < silkList.size() -1; j++) {
+                if (silkList.get(i).overlaps(silkList.get(j))) {
+                    count++;
+                }
+            }
+        }
+        return count -1;
+    }
 
     /**
      * This method draws the silk coming out of the spiderBoi, taking the endpoint as th emiddle of the spiderBoi image
@@ -75,17 +77,7 @@ public class SpiderSilk {
             }
         }
 
-        /*
-        for (int i = 0; i < silkList.size() -1; i++) {
-            for (int j = 0; j < silkList.size() -1; j++) {
-                 if (i == j) {                                 TO BE FIXED!!! THIS IMPLEMENTATION IS WRONG
-                     j++;
-                     silkList.get(i)
 
-                 }
-            }
-        }
-        */
 
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
