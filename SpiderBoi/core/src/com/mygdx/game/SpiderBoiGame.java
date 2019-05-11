@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -45,8 +46,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		isTouching = false;
 		gameLevel = new Level(2);
 		gameLevel.showLevel(sp);
-		Label.LabelStyle labelStyle = new Label.LabelStyle();
-		labelStyle.fontColor = Color.PURPLE;
+		Label.LabelStyle labelStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 		label1 = new Label("Knots : " + totalKnot + " out of " + "3", labelStyle);
 		label1.setPosition(0, Gdx.graphics.getWidth() / 16);
 		label1.setAlignment(Align.topLeft);
