@@ -41,7 +41,6 @@ public class SpiderSilk {
                 if (i != j + 1 || i != j - 1) {
                     if (silkList.get(i).overlaps(silkList.get(j))) {
                         count++;
-                        System.out.print(count);
                     }
                 }
             }
