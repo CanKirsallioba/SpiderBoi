@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.*;
@@ -30,12 +31,14 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	Level gameLevel;
 	BitmapFont font;
 	String lastDirection;
+	Texture background;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		textBatch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
+		background = new Texture("background.png");
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
@@ -45,6 +48,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		font.setUseIntegerPositions(false);
 		font.setColor(0f, 0f, 0f, 1.0f);
 		lastDirection = "n";
+	}
+
+	public void renderBackground() {
+		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
@@ -72,6 +79,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 
 		batch.begin();
+		renderBackground();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
 		{
 			gameLevel.obstacles.get(i).draw(batch);
