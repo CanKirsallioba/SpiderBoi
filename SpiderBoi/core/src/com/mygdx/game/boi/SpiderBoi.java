@@ -12,8 +12,8 @@ public class SpiderBoi extends Boi {
     private Vector2 velocity;
     private final Texture spiderBoiUp = new Texture("SpiderBU.png");
     private final Texture spiderBoiDown = new Texture("SpiderBD.png");
-    private final Texture spiderBoiLeft = new Texture("SpiderBR.png");
-    private final Texture spiderBoiRight = new Texture("SpiderBL.png");
+    private final Texture spiderBoiLeft = new Texture("SpiderBL.png");
+    private final Texture spiderBoiRight = new Texture("SpiderBR.png");
     boolean onObstacle;
     ArrayList<Vector2> stopLocations;
 
