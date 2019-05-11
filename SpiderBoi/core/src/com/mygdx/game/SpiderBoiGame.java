@@ -35,6 +35,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	int totalKnot = 0;
 	private Stage stage;
 	Label label1;
+	String lastDirection;
 
 	@Override
 	public void create () {
@@ -53,6 +54,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		label1.setPosition(0, Gdx.graphics.getWidth() - row *2);
 		label1.setAlignment(Align.topLeft);
 		stage.addActor(label1);
+		lastDirection = "n";
 
 	}
 
@@ -143,14 +145,22 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		if(newTouch.cpy().sub(lastTouch).len()<SWIPE_THRESHOLD)
 			return false;
 		float angle = newTouch.cpy().sub(lastTouch).angle();
-		if((angle < 45 || angle > 315) && sp.getVelocity().isZero())
+		if((angle < 45 || angle > 315) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
 			sp.moveRight();
-		if((angle > 45 && angle < 135) && sp.getVelocity().isZero())
-			sp.moveDown();
-		if((angle > 135 && angle < 225) && sp.getVelocity().isZero())
-			sp.moveLeft();
-		if((angle > 225 && angle < 315) && sp.getVelocity().isZero())
-			sp.moveUp();
+			lastDirection = "r";
+		}
+		if((angle > 45 && angle < 135) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
+            		sp.moveDown();
+            		lastDirection = "d";
+        	}
+		if((angle > 135 && angle < 225) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
+           	 sp.moveLeft();
+          	  lastDirection = "l";
+       	        }
+		if((angle > 225 && angle < 315) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
+                	sp.moveUp();
+                	lastDirection = "u";
+        	}
 		if (sp.getVelocity().isZero())
 			sp.move();
 		return true;
