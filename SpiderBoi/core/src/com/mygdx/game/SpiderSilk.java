@@ -38,8 +38,10 @@ public class SpiderSilk {
         int count = 0;
         for (int i = 0; i < silkList.size() - 1; i++) {
             for (int j = 0; j < silkList.size() - 1; j++) {
-                if (silkList.get(i).overlaps(silkList.get(j))) {
-                    count++;
+                if (i != j + 1 || i != j - 1) {
+                    if (silkList.get(i).overlaps(silkList.get(j))) {
+                        count++;
+                    }
                 }
             }
         }
