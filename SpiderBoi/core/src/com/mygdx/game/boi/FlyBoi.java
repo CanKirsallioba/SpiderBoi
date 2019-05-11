@@ -11,13 +11,11 @@ public abstract class FlyBoi extends Boi {
     //Properties
     SpriteBatch spriteBatch;
     protected Texture image;
-    boolean isPresent;
 
     public FlyBoi(String fileName, int x, int y) {
         super(fileName);
         setPosition(new Vector2(x, y));
         spriteBatch = new SpriteBatch();
-        isPresent = true;
     }
 
     //Methods
@@ -27,14 +25,6 @@ public abstract class FlyBoi extends Boi {
         spriteBatch.begin();
         spriteBatch.draw(image, 0, 0);
         spriteBatch.end();
-    }
-
-    public boolean isPresent() {
-        return isPresent;
-    }
-
-    public void setPresent(boolean isPresent) {
-        this.isPresent = isPresent;
     }
 
     public abstract void performInteraction(SpiderBoi spiderBoi);

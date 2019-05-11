@@ -87,9 +87,12 @@ public class Obstacle {
 
         }
 
-        if (spiderBoi.getPosition().x + spiderBoi.getImage().getWidth() / 2 > Gdx.graphics.getWidth() || spiderBoi.getPosition().x < 0
-                || spiderBoi.getPosition().y + spiderBoi.getImage().getHeight() / 2 > Gdx.graphics.getHeight() || spiderBoi.getPosition().y < 0) {
+        if (spiderBoi.getPosition().x + spiderBoi.getImage().getWidth() / 2 > Gdx.graphics.getWidth()
+                || spiderBoi.getPosition().x < 0
+                || spiderBoi.getPosition().y + spiderBoi.getImage().getHeight() / 2 > Gdx.graphics.getHeight()
+                || spiderBoi.getPosition().y < 0) {
             spiderBoi.getVelocity().setZero();
+            spiderBoi.setPresent(false);
         }
         return spiderBoi.isOnObstacle();
     }

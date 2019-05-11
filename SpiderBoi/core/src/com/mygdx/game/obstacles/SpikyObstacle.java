@@ -1,7 +1,9 @@
 package com.mygdx.game.obstacles;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.boi.SpiderBoi;
 
 public class SpikyObstacle extends Obstacle{
 
@@ -43,7 +45,7 @@ public class SpikyObstacle extends Obstacle{
                 || spiderBoi.getPosition().y < 0)
         {
             spiderBoi.getVelocity().setZero(); // Stop the SpiderBoi
-            spiderBoi.setPresent( false); // rip
+            spiderBoi.setPresent(false); // rip
             // Open the "You lost the level" GUI screen.
         }
         return spiderBoi.isOnObstacle();

@@ -9,11 +9,13 @@ public class Boi {
     //properties
     private Vector2 position;
     private Texture image;
+    boolean isPresent;
 
     //constructors
     public Boi(String fileName) {
         image = new Texture(fileName);
         position = new Vector2(0,0);
+        isPresent = true;
     }
 
     //methods
@@ -77,5 +79,13 @@ public class Boi {
     public void draw(SpriteBatch batch)
     {
         batch.draw(image, position.x, position.y);
+    }
+
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean isPresent) {
+        this.isPresent = isPresent;
     }
 }

@@ -38,7 +38,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		batch = new SpriteBatch();
 		textBatch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
-		background = new Texture("background.png");
+		background = new Texture("background3.png");
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
@@ -93,16 +93,22 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 				gameLevel.collectableBois.get(i).performInteraction(sp);
 			}
 		}
+
 		Boolean a = silk.checkKnot();
-		if(a)
+		if(a) {
 			silk.addKnot();
-		sp.draw(batch);
+		}
+
+		if (sp.isPresent()) {
+			sp.draw(batch);
+		}
 
 		font.draw(batch, "Knots: " + silk.getKnotCount(), 50, 50);
 
 		batch.end();
 
-		silk.drawSilk();
+		if (sp.isPresent())
+			silk.drawSilk();
 
 		sp.move();
 
