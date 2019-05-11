@@ -39,6 +39,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public void create () {
 		stage = new Stage(new ScreenViewport());
+		int row = Gdx.graphics.getWidth() / 16;
+		int col = Gdx.graphics.getWidth() / 16;
 		batch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
 		silk = new SpiderSilk(sp);
@@ -48,7 +50,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		gameLevel.showLevel(sp);
 		Label.LabelStyle labelStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 		label1 = new Label("Knots : " + totalKnot + " out of " + "3", labelStyle);
-		label1.setPosition(0, Gdx.graphics.getWidth() / 16);
+		label1.setPosition(0, Gdx.graphics.getWidth() - row *2);
 		label1.setAlignment(Align.topLeft);
 		stage.addActor(label1);
 
@@ -77,7 +79,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		}*/
 
 
-
 		batch.begin();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
 		{
@@ -102,7 +103,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		label1.setText("Knots : " + totalKnot + " out of " + "3");
 
 		sp.move();
-
 	}
 
 	@Override

@@ -36,12 +36,12 @@ public class SpiderSilk {
 
     public int checkKnot () {
         int count = 0;
-        for (int i = 0; i < silkList.size(); i++) {
-            for (int j = 0; j < silkList.size() - 10; j++) {
-                if (silkList.get(i) != silkList.get(j)) {
+        for (int i = 0; i < silkList.size() - 1; i++) {
+            for (int j = 0; j < silkList.size() - 1; j++) {
+                if (i != j + 1 || i != j - 1) {
                     if (silkList.get(i).overlaps(silkList.get(j))) {
                         count++;
-                        System.out.println(count);
+                        System.out.print(count);
                     }
                 }
             }
