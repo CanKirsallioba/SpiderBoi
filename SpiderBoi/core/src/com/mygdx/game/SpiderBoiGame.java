@@ -90,8 +90,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		}*/
 
 
+
 		batch.begin();
-		renderBackground();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
 		{
 			gameLevel.obstacles.get(i).draw(batch);
@@ -105,14 +105,15 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 				gameLevel.collectableBois.get(i).performInteraction(sp);
 			}
 		}
+		if(silk.checkKnot())
+		    silk.addKnot();
 		sp.draw(batch);
+
+		font.draw(batch, "Knots: " + silk.getKnotCount(), 50, 50);
+
 		batch.end();
 
 		silk.drawSilk();
-		if (silk.checkKnot() != 0) {
-			totalKnot = silk.checkKnot();
-		}
-		label1.setText("Knots : " + totalKnot + " out of " + "3");
 
 		sp.move();
 	}
