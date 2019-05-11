@@ -4,17 +4,11 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.boi.*;
 import com.mygdx.game.obstacles.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -26,6 +20,7 @@ import java.util.Vector;
 
 public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch batch;
+	SpriteBatch textBatch;
 	SpiderBoi sp;
 	private Vector2 lastTouch;
 	final float SWIPE_THRESHOLD = 80;
@@ -33,43 +28,28 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	boolean isTouching;
 	SpiderSilk silk;
 	Level gameLevel;
-	int totalKnot = 0;
-	private Stage stage;
-	Label label1;
-	Texture background;
-	Sprite backgroundSprite;
+	BitmapFont font;
 	String lastDirection;
 
 	@Override
 	public void create () {
-		stage = new Stage(new ScreenViewport());
-		int row = Gdx.graphics.getWidth() / 16;
-		int col = Gdx.graphics.getWidth() / 16;
 		batch = new SpriteBatch();
+		textBatch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
 		gameLevel = new Level(2);
 		gameLevel.showLevel(sp);
-		Label.LabelStyle labelStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-		label1 = new Label("Knots : " + totalKnot + " out of " + "3", labelStyle);
-		label1.setPosition(0, Gdx.graphics.getWidth() - row *2);
-		label1.setAlignment(Align.topLeft);
-		stage.addActor(label1);
-		background = new Texture("background.png");
-		backgroundSprite = new Sprite(background);
-		backgroundSprite.setAlpha(0.1f);
+		font = new BitmapFont();
+		font.setUseIntegerPositions(false);
+		font.setColor(0f, 0f, 0f, 1.0f);
 		lastDirection = "n";
-
-	}
-
-	public void renderBackground() {
-		batch.draw(backgroundSprite, 0 , 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
 	public void render () {
+		Gdx.gl.glClearColor(104/255f, 252/255f, 255/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		/*if(sp.getBoundary().overlaps(plObs.getBoundary()))
@@ -105,8 +85,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 				gameLevel.collectableBois.get(i).performInteraction(sp);
 			}
 		}
-		if(silk.checkKnot())
-		    silk.addKnot();
+		Boolean a = silk.checkKnot();
+		if(a)
+			silk.addKnot();
 		sp.draw(batch);
 
 		font.draw(batch, "Knots: " + silk.getKnotCount(), 50, 50);
@@ -116,6 +97,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		silk.drawSilk();
 
 		sp.move();
+
 	}
 
 	@Override
@@ -153,7 +135,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		Vector2 newTouch = new Vector2(screenX, screenY);
-		if(newTouch.cpy().sub(lastTouch).len()<SWIPE_THRESHOLD)
+		if(newTouch.cpy().sub(lastTouch).len() < SWIPE_THRESHOLD)
 			return false;
 		float angle = newTouch.cpy().sub(lastTouch).angle();
 		if((angle < 45 || angle > 315) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
@@ -161,17 +143,17 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			lastDirection = "r";
 		}
 		if((angle > 45 && angle < 135) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
-            		sp.moveDown();
-            		lastDirection = "d";
-        	}
+			sp.moveDown();
+			lastDirection = "d";
+		}
 		if((angle > 135 && angle < 225) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
-           	 sp.moveLeft();
-          	  lastDirection = "l";
-       	        }
+			sp.moveLeft();
+			lastDirection = "l";
+		}
 		if((angle > 225 && angle < 315) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
-                	sp.moveUp();
-                	lastDirection = "u";
-        	}
+			sp.moveUp();
+			lastDirection = "u";
+		}
 		if (sp.getVelocity().isZero())
 			sp.move();
 		return true;

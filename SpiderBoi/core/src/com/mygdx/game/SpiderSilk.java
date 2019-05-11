@@ -10,6 +10,8 @@ import com.mygdx.game.boi.*;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.min;
+
 public class SpiderSilk {
 
     //properties
@@ -17,24 +19,26 @@ public class SpiderSilk {
     private int knotCount;
     private SpiderBoi spiderBoi;
     private ShapeRenderer shapeRenderer;
-    ArrayList <Rectangle> silkList;
+    private int lastHit = -1;
+    ArrayList<Rectangle> silkList;
 
     /**
      * Constructor for the SpiderSilk class initialises the spiderBoi, knotcount, shaperenderer, and silklist.
+     *
      * @param spB is the spiderBoi main character of the game, which will be used for the location in this class.
      */
-    public SpiderSilk (SpiderBoi spB) {
+    public SpiderSilk(SpiderBoi spB) {
         spiderBoi = spB;
         knotCount = 0;
         shapeRenderer = new ShapeRenderer();
-        silkList = new ArrayList <Rectangle>();
+        silkList = new ArrayList<Rectangle>();
     }
 
     //methods
 
 
+    public boolean checkKnot () {
 
-     public boolean checkKnot () {
         if(spiderBoi.getVelocity().isZero()){
             lastHit = silkList.size()-1;
             return false;
@@ -56,7 +60,7 @@ public class SpiderSilk {
      * This method draws the silk coming out of the spiderBoi, taking the endpoint as th emiddle of the spiderBoi image
      * it stops drawing when it reaches an obstacle, so when it's velocity is zero.
      */
-   public void drawSilk() {
+    public void drawSilk() {
         if (spiderBoi.isOnObstacle()) {
             spiderBoi.getStopLocations().add(spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()));
             if (spiderBoi.getStopLocations().size() > 1) {
@@ -103,4 +107,14 @@ public class SpiderSilk {
 
 
     }
+
+    public int getKnotCount() {
+        return knotCount;
+    }
+
+    public void addKnot()
+    {
+        knotCount ++;
+    }
 }
+
