@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -35,6 +36,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	int totalKnot = 0;
 	private Stage stage;
 	Label label1;
+	Texture background;
+	Sprite backgroundSprite;
 
 	@Override
 	public void create () {
@@ -53,12 +56,18 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		label1.setPosition(0, Gdx.graphics.getWidth() - row *2);
 		label1.setAlignment(Align.topLeft);
 		stage.addActor(label1);
+		background = new Texture("background.png");
+		backgroundSprite = new Sprite(background);
+		backgroundSprite.setAlpha(0.1f);
 
+	}
+
+	public void renderBackground() {
+		batch.draw(backgroundSprite, 0 , 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(104/255f, 252/255f, 255/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		/*if(sp.getBoundary().overlaps(plObs.getBoundary()))
@@ -80,6 +89,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 
 		batch.begin();
+		renderBackground();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
 		{
 			gameLevel.obstacles.get(i).draw(batch);
