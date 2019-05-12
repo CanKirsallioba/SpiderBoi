@@ -14,14 +14,12 @@ public class SpiderBoiSkin {
 
     //properties
     Texture[] directions = new Texture[4]; //down, right, up, left
-    boolean isUnlocked;
     int cost;
 
     public SpiderBoiSkin(String[] fileNames, int cost) {
         for (int index = 0; index < fileNames.length; index++)
             directions[index] = new Texture(fileNames[index]);
 
-        isUnlocked = false;
         this.cost = cost;
     }
 
@@ -42,19 +40,11 @@ public class SpiderBoiSkin {
     }
 
     public boolean canUnlock() {
-        if (Store.getTotalFlyBoi() >= cost && !isUnlocked) {
+        if (Store.getTotalFlyBoi() >= cost) {
             return true;
         }
 
         return false;
-    }
-
-    public void unlock() {
-        isUnlocked = true;
-    }
-
-    public boolean isUnlocked() {
-        return isUnlocked;
     }
 
     public int getCost() {

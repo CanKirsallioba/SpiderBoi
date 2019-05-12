@@ -19,26 +19,15 @@ public class SpiderBoiBackground
 
     public SpiderBoiBackground(String fileName, int cost) {
         super(fileName);
-        isUnlocked = false;
         this.cost = cost;
     }
 
     public boolean canUnlock() {
-        if (Store.getTotalFlyBoi() >= cost && !isUnlocked) {
+        if (Store.getTotalFlyBoi() >= cost) {
             return true;
         }
 
         return false;
-    }
-
-    public void unlock() {
-        if (canUnlock()) {
-            isUnlocked = true;
-        }
-    }
-
-    public boolean isUnlocked() {
-        return isUnlocked;
     }
 
     public int getCost() {

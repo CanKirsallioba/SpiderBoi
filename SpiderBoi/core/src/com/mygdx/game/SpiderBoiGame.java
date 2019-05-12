@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
 
-    Preferences savedState;
+    static Preferences savedState;
     static final float SWIPE_THRESHOLD = 80;
 	SpriteBatch batch;
 	SpiderBoi sp;
@@ -36,13 +36,14 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public void create() {
+        savedState = Gdx.app.getPreferences("com.mygdx.game.gameState");
         store = new Store();
         initializeVisuals();
         initializeSpiderBoi();
         adjustScreen();
 		loadLevel();
 		loadLabels();
-		loadSavedState();
+        loadSavedState();
 	}
 
 	public void initializeVisuals() {
@@ -71,10 +72,12 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
         knotLabel.setUseIntegerPositions(false);
         knotLabel.getData().setScale(3, 3);
         knotLabel.setColor(1f, 1f, 1f, 1f);
+
         storeFlyBoiLabel = new BitmapFont();
         storeFlyBoiLabel.setUseIntegerPositions(false);
         storeFlyBoiLabel.getData().setScale(3, 3);
         storeFlyBoiLabel.setColor(1f, 1f, 1f, 1f);
+
         totalKnotsLabel = new BitmapFont();
         totalKnotsLabel.setUseIntegerPositions(false);
         totalKnotsLabel.getData().setScale(3, 3);
@@ -82,12 +85,11 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
     }
 
 	public void loadSavedState() {
-        savedState = Gdx.app.getPreferences("com.mygdx.game.save");
-        if (savedState.getInteger("storeFlyBoi") != 0
-                || savedState.getInteger("totalKnots") != 0) {
-            savedState.putInteger("storeFlyBoi", 0);
-            savedState.putInteger("totalKnots", 0);
-        }
+        savedState.putInteger("storeFlyBoi", 0);
+        savedState.putInteger("totalKnots", 0);
+        savedState.putString("unlockedSkins", "0");
+        savedState.putString("unlockedBackgrounds", "0");
+
 
         store.setTotalFlyBoi(savedState.getInteger("storeFlyBoi"));
         Achievement.setTotalKnots(savedState.getInteger("totalKnots"));
@@ -138,11 +140,24 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	}
 
+	public void saveGame() {
+        savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
+        savedState.putInteger("totalKnots", Achievement.getTotalKnots());
+
+        for (int index = 0; index < store.getSpiderBoiSkinUnlockedList().size(); index++)
+            savedState.putString("unlockedSkins", store.getUnlockedSkinData());
+
+        for (int index = 0; index < store.getSpiderBoiBackgroundUnlockedList().size(); index++)
+            savedState.putString("unlockedBackgrounds", store.getUnlockedBackgroundData());
+
+        savedState.putInteger("selectedSkin", store.indexOfSelectedSkin());
+        savedState.putInteger("selectedBackground", store.indexOfSelectedBackground());
+
+        savedState.flush();
+    }
 	@Override
 	public void dispose () {
-	    savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
-	    savedState.putInteger("totalKnots", Achievement.getTotalKnots());
-	    savedState.flush();
+	    saveGame();
 		batch.dispose();
 		sp.getImage().dispose();
 	}
@@ -229,6 +244,16 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
     public Texture getBackground() { return background; }
 
+    public static Preferences getSavedState() { return savedState; }
+
+    public SpiderBoi getSp() { return sp; }
+
+    public BitmapFont getStoreFlyBoiLabel() { return storeFlyBoiLabel; }
+
+    public BitmapFont getTotalKnotsLabel() { return totalKnotsLabel; }
+
+    public Store getStore() { return store; }
+
     //setters
     public void setBatch(SpriteBatch batch) { this.batch = batch; }
 
@@ -249,4 +274,14 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
     public void setLastDirection(String lastDirection) { this.lastDirection = lastDirection; }
 
     public void setBackground(Texture background) { this.background = background; }
+
+    public void setSavedState(Preferences setTo) { savedState = setTo; }
+
+    public void setSp(SpiderBoi sp) { this.sp = sp; }
+
+    public void setStoreFlyBoiLabel(BitmapFont storeFlyBoiLabel) { this.storeFlyBoiLabel = storeFlyBoiLabel; }
+
+    public void setTotalKnotsLabel(BitmapFont totalKnotsLabel) { this.totalKnotsLabel = totalKnotsLabel; }
+
+    public void setStore(Store store) { this.store = store; }
 }
