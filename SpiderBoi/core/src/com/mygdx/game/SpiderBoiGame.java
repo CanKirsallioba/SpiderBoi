@@ -2,82 +2,86 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.*;
+import com.mygdx.game.menu.achievements.Achievement;
+import com.mygdx.game.menu.store.Store;
 import com.mygdx.game.obstacles.*;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import java.util.Vector;
+
+import java.util.Scanner;
 
 public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
+
+    static FileHandle gameStats;
+    static Scanner scanStats;
+    static final float SWIPE_THRESHOLD = 80;
 	SpriteBatch batch;
 	SpriteBatch textBatch;
 	SpiderBoi sp;
 	private Vector2 lastTouch;
-	final float SWIPE_THRESHOLD = 80;
 	PlainObstacle plObs;
 	boolean isTouching;
 	SpiderSilk silk;
 	Level gameLevel;
-	BitmapFont font;
+	BitmapFont knotLabel;
+	BitmapFont storeFlyBoiLabel;
+	BitmapFont totalKnotsLabel;
 	String lastDirection;
 	Texture background;
+	Store store;
 
 	@Override
-	public void create () {
+	public void create() {
+	    gameStats = Gdx.files.internal("save.txt");
+	    scanStats = new Scanner(gameStats.readString());
+        store = new Store();
 		batch = new SpriteBatch();
 		textBatch = new SpriteBatch();
-		sp = new SpiderBoi("SpiderBD.jpeg");
-		background = new Texture("backgroundSpiked3.png");
+		sp = new SpiderBoi(store.getSelectedSpiderBoiSkin());
+		background = store.getSelectedSpiderBoiBackground();
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
 		gameLevel = new Level(2);
 		gameLevel.showLevel(sp);
-		font = new BitmapFont();
-		font.setUseIntegerPositions(false);
-		font.setColor(0f, 0f, 0f, 1.0f);
+		knotLabel = new BitmapFont();
+		knotLabel.setUseIntegerPositions(false);
+		knotLabel.getData().setScale(3, 3);
+		knotLabel.setColor(1f, 1f, 1f, 1f);
+        storeFlyBoiLabel = new BitmapFont();
+        storeFlyBoiLabel.setUseIntegerPositions(false);
+        storeFlyBoiLabel.getData().setScale(3, 3);
+        storeFlyBoiLabel.setColor(1f, 1f, 1f, 1f);
+        totalKnotsLabel = new BitmapFont();
+        totalKnotsLabel.setUseIntegerPositions(false);
+        totalKnotsLabel.getData().setScale(3, 3);
+        totalKnotsLabel.setColor(1f, 1f, 1f, 1f);
 		lastDirection = "n";
+		loadSaved();
 	}
+
+    public void loadSaved() {
+        while(scanStats.hasNext()) {
+            String stats = scanStats.next();
+            if (stats.equals("sfb")) {
+                store.setTotalFlyBoi(Integer.parseInt(scanStats.next()));
+            } else if (stats.equals("tk")) {
+                Achievement.setTotalKnots(Integer.parseInt(scanStats.next()));
+            }
+        }
+    }
 
 	public void renderBackground() {
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(104/255f, 252/255f, 255/255f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		/*if(sp.getBoundary().overlaps(plObs.getBoundary()))
-		{
-			Vector2 reverseVel = sp.getVelocity().scl(-1);
-			while(sp.getBoundary().overlaps(plObs.getBoundary())) {
-				sp.setVelocity(reverseVel);
-				sp.move();
-			}
-			sp.getVelocity().setZero();
-			sp.onObstacle = true;
-
-		}
-
-		if (sp.getPosition().x > Gdx.graphics.getWidth() || sp.getPosition().x < 0
-				|| sp.getPosition().y > Gdx.graphics.getHeight() || sp.getPosition().y < 0) {
-			sp.getVelocity().setZero();
-		}*/
-
-
-
+	public void render() {
 		batch.begin();
 		renderBackground();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
@@ -90,20 +94,23 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		{
 			if (gameLevel.collectableBois.get(i).isPresent()) {
 				gameLevel.collectableBois.get(i).draw(batch);
-				gameLevel.collectableBois.get(i).performInteraction(sp);
+				gameLevel.collectableBois.get(i).performInteraction(this);
 			}
 		}
 
 		Boolean a = silk.checkKnot();
-		if(a) {
+		if (a) {
 			silk.addKnot();
+			Achievement.incrementTotalKnots();
 		}
 
 		if (sp.isPresent()) {
 			sp.draw(batch);
 		}
 
-		font.draw(batch, "Knots: " + silk.getKnotCount(), 50, 50);
+		knotLabel.draw(batch, "Knots: " + silk.getKnotCount(), 50, Gdx.graphics.getHeight() - 50);
+		storeFlyBoiLabel.draw(batch, "StoreFlyBois: " + store.getTotalFlyBoi(), 50, 75);
+        totalKnotsLabel.draw(batch, "Total Knots: " + Achievement.getTotalKnots(), Gdx.graphics.getWidth() - 300, 75);
 
 		batch.end();
 
@@ -182,4 +189,92 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
+    //public static FileHandle getGameStats() { return gameStats; }
+
+    //public static Scanner getScanStats() { return scanStats; }
+
+    public static float getSwipeThreshold() { return SWIPE_THRESHOLD; }
+
+    public SpriteBatch getBatch() { return batch; }
+
+    public SpriteBatch getTextBatch() { return textBatch; }
+
+    public SpiderBoi getSpiderBoi() { return sp; }
+
+    public Vector2 getLastTouch() {
+        return lastTouch;
+    }
+
+    public PlainObstacle getPlObs() {
+        return plObs;
+    }
+
+    public boolean isTouching() {
+        return isTouching;
+    }
+
+    public SpiderSilk getSilk() {
+        return silk;
+    }
+
+    public Level getGameLevel() {
+        return gameLevel;
+    }
+
+    public BitmapFont getKnotLabel() {
+        return knotLabel;
+    }
+
+    public String getLastDirection() {
+        return lastDirection;
+    }
+
+    public Texture getBackground() {
+        return background;
+    }
+
+    public void setBatch(SpriteBatch batch) {
+        this.batch = batch;
+    }
+
+    public void setTextBatch(SpriteBatch textBatch) {
+        this.textBatch = textBatch;
+    }
+
+    public void setSpiderBoi(SpiderBoi sp) {
+        this.sp = sp;
+    }
+
+    public void setLastTouch(Vector2 lastTouch) {
+        this.lastTouch = lastTouch;
+    }
+
+    public void setPlObs(PlainObstacle plObs) {
+        this.plObs = plObs;
+    }
+
+    public void setTouching(boolean touching) {
+        isTouching = touching;
+    }
+
+    public void setSilk(SpiderSilk silk) {
+        this.silk = silk;
+    }
+
+    public void setGameLevel(Level gameLevel) {
+        this.gameLevel = gameLevel;
+    }
+
+    public void setKnotLabel(BitmapFont knotLabel) {
+        this.knotLabel = knotLabel;
+    }
+
+    public void setLastDirection(String lastDirection) {
+        this.lastDirection = lastDirection;
+    }
+
+    public void setBackground(Texture background) {
+        this.background = background;
+    }
 }

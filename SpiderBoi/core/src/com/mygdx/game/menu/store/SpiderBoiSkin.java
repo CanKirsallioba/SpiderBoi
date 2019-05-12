@@ -13,7 +13,7 @@ import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 public class SpiderBoiSkin {
 
     //properties
-    Texture[] directions; //down, right, up, left
+    Texture[] directions = new Texture[4]; //down, right, up, left
     boolean isUnlocked;
     int cost;
 
@@ -25,8 +25,24 @@ public class SpiderBoiSkin {
         this.cost = cost;
     }
 
+    public Texture getDownSpiderBoi() {
+        return directions[0];
+    }
+
+    public Texture getRightSpiderBoi() {
+        return directions[1];
+    }
+
+    public Texture getUpSpiderBoi() {
+        return directions[2];
+    }
+
+    public Texture getLeftSpiderBoi() {
+        return directions[3];
+    }
+
     public boolean canUnlock() {
-        if (StoreFlyBoi.getTotalFlyBoi() >= cost && !isUnlocked) {
+        if (Store.getTotalFlyBoi() >= cost && !isUnlocked) {
             return true;
         }
 

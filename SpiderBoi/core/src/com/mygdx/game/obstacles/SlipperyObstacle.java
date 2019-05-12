@@ -3,7 +3,8 @@ package com.mygdx.game.obstacles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public class SlipperyObstacle extends Obstacle {
+public class SlipperyObstacle
+        extends Obstacle {
 
     //properties
     //constructor

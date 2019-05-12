@@ -12,8 +12,8 @@ public class Boi {
     boolean isPresent;
 
     //constructors
-    public Boi(String fileName) {
-        image = new Texture(fileName);
+    public Boi(Texture texture) {
+        image = texture;
         position = new Vector2(0,0);
         isPresent = true;
     }

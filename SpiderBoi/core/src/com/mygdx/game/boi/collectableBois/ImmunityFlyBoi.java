@@ -1,8 +1,11 @@
 package com.mygdx.game.boi.collectableBois;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.SpiderBoiGame;
 import com.mygdx.game.boi.SpiderBoi;
 
-public class ImmunityFlyBoi extends CollectableBoi {
+public class ImmunityFlyBoi
+        extends CollectableBoi {
     /**
      * This is the constructor for the ImmunityFlyBoi class.
      * Calls the parent constructor and initialises the position.
@@ -11,14 +14,14 @@ public class ImmunityFlyBoi extends CollectableBoi {
      */
     public ImmunityFlyBoi(int x, int y)
     {
-        super("immunityFlyBoi.png", x, y);
+        super(new Texture("immunityFlyBoi.png"), x, y);
     }
 
     //methods
     @Override
-    public void performInteraction(SpiderBoi spiderBoi)
+    public void performInteraction(SpiderBoiGame game)
     {
-        if (spiderBoi.getBoundary().overlaps(getBoundary()))
+        if (game.getSpiderBoi().getBoundary().overlaps(getBoundary()))
         {
             setPresent(false);
             //todo

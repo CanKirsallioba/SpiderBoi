@@ -10,7 +10,8 @@ import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
  * @version 1.0 on 08.05.2019
  */
 
-public class SpiderBoiBackground extends Texture {
+public class SpiderBoiBackground
+        extends Texture {
 
     //properties
     boolean isUnlocked;
@@ -23,7 +24,7 @@ public class SpiderBoiBackground extends Texture {
     }
 
     public boolean canUnlock() {
-        if (StoreFlyBoi.getTotalFlyBoi() >= cost && !isUnlocked) {
+        if (Store.getTotalFlyBoi() >= cost && !isUnlocked) {
             return true;
         }
 

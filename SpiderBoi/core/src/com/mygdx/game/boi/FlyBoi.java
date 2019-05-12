@@ -3,29 +3,17 @@ package com.mygdx.game.boi;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.SpiderBoiGame;
 import com.mygdx.game.boi.Boi;
 import com.mygdx.game.boi.SpiderBoi;
 
-public abstract class FlyBoi extends Boi {
+public abstract class FlyBoi
+        extends Boi {
 
-    //Properties
-    SpriteBatch spriteBatch;
-    protected Texture image;
-
-    public FlyBoi(String fileName, int x, int y) {
-        super(fileName);
+    public FlyBoi(Texture image, int x, int y) {
+        super(image);
         setPosition(new Vector2(x, y));
-        spriteBatch = new SpriteBatch();
     }
 
-    //Methods
-
-    public void drawCharacter()
-    {
-        spriteBatch.begin();
-        spriteBatch.draw(image, 0, 0);
-        spriteBatch.end();
-    }
-
-    public abstract void performInteraction(SpiderBoi spiderBoi);
+    public abstract void performInteraction(SpiderBoiGame game);
 }

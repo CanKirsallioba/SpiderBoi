@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 
-public class SpikyObstacle extends Obstacle{
+public class SpikyObstacle
+        extends Obstacle{
 
     //constructor
     /**

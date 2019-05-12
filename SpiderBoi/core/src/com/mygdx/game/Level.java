@@ -23,7 +23,6 @@ public class Level {
     int levelNo;
     ArrayList<Obstacle> obstacles;
     ArrayList<CollectableBoi> collectableBois;
-    FileHandle levelFile;
 
     //constructor
 

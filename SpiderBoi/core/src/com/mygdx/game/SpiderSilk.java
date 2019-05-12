@@ -15,7 +15,6 @@ import static java.lang.Math.min;
 public class SpiderSilk {
 
     //properties
-
     private int knotCount;
     private SpiderBoi spiderBoi;
     private ShapeRenderer shapeRenderer;
@@ -38,7 +37,6 @@ public class SpiderSilk {
 
 
     public boolean checkKnot () {
-
         if(spiderBoi.getVelocity().isZero()){
             lastHit = silkList.size()-1;
             return false;
@@ -87,20 +85,6 @@ public class SpiderSilk {
             shapeRenderer.rect(tmp.getX(), tmp.getY(), tmp.getWidth(), tmp.getHeight());
         }
 
-
-
-        /*
-        for (int i = 0; i < silkList.size() -1; i++) {
-            for (int j = 0; j < silkList.size() -1; j++) {
-                 if (i == j) {                                 TO BE FIXED!!! THIS IMPLEMENTATION IS WRONG
-                     j++;
-                     silkList.get(i)
-
-                 }
-            }
-        }
-        */
-
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
         shapeRenderer.end();
@@ -112,9 +96,10 @@ public class SpiderSilk {
         return knotCount;
     }
 
-    public void addKnot()
-    {
-        knotCount ++;
+    public void addKnot() { knotCount++; }
+
+    public void removeKnot() {
+        knotCount--;
     }
 }
 

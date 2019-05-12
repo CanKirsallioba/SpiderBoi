@@ -1,8 +1,12 @@
 package com.mygdx.game.boi.collectableBois;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.SpiderBoiGame;
+import com.mygdx.game.SpiderSilk;
 import com.mygdx.game.boi.SpiderBoi;
 
-public class KnotFlyBoi extends CollectableBoi {
+public class KnotFlyBoi
+        extends CollectableBoi {
     /**
      * This is the constructor for the KnotFlyBoi class.
      * Calls the parent constructor and initialises the position.
@@ -11,17 +15,17 @@ public class KnotFlyBoi extends CollectableBoi {
      */
     public KnotFlyBoi(int x, int y)
     {
-        super("knotFlyBoi.png", x, y);
+        super(new Texture("knotFlyBoi.png"), x, y);
     }
 
     // methods
     @Override
-    public void performInteraction(SpiderBoi spiderBoi)
+    public void performInteraction(SpiderBoiGame game)
     {
-        if (spiderBoi.getBoundary().overlaps(getBoundary()))
+        if (game.getSpiderBoi().getBoundary().overlaps(getBoundary()))
         {
             setPresent(false);
-            //todo
+            game.getSilk().removeKnot();
         }
     }
 }

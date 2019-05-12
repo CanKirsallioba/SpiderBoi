@@ -2,16 +2,18 @@ package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.SpiderBoiGame;
 import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.boi.collectableBois.*;
+import com.mygdx.game.menu.store.Store;
 
 /** FlyBois that can be collected and used to purchase skins and backgrounds in the store.
  * @author JavaBoiz
  * @version v0.1 on 05.05.2019
  */
-public class StoreFlyBoi extends CollectableBoi
+public class StoreFlyBoi
+        extends CollectableBoi
 {
-    static int totalFlyBoi = 0;
     // constructors
     /**
      * This is the constructor for the StoreFlyBoi class.
@@ -21,26 +23,18 @@ public class StoreFlyBoi extends CollectableBoi
      */
     public StoreFlyBoi(int x, int y)
     {
-        super("storeFlyBoi.png", x, y);
+        super(new Texture("storeFlyBoi.png"), x, y);
     }
 
     // methods
     @Override
-    public void performInteraction(SpiderBoi spiderBoi)
+    public void performInteraction(SpiderBoiGame game)
     {
-        if (spiderBoi.getBoundary().overlaps(getBoundary()))
+        if (game.getSpiderBoi().getBoundary().overlaps(getBoundary()))
         {
             setPresent(false);
-            totalFlyBoi++;
+            Store.incrementTotalFlyBoi();
         }
-    }
-
-    /**
-     * This method gets the total flyBoi count for the store.
-     * @return the total number of the flyBoi's.
-     */
-    public static int getTotalFlyBoi() {
-        return totalFlyBoi;
     }
 }
 

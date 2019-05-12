@@ -2,32 +2,32 @@ package com.mygdx.game.boi;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.menu.store.SpiderBoiSkin;
 
 import java.util.ArrayList;
 
-public class SpiderBoi extends Boi {
+public class SpiderBoi
+        extends Boi {
 
     //properties
     private float speed;
     private Vector2 velocity;
-    private final Texture spiderBoiUp = new Texture("SpiderBU.png");
-    private final Texture spiderBoiDown = new Texture("SpiderBD.png");
-    private final Texture spiderBoiLeft = new Texture("SpiderBL.png");
-    private final Texture spiderBoiRight = new Texture("SpiderBR.png");
     boolean onObstacle;
     ArrayList<Vector2> stopLocations;
+    SpiderBoiSkin spiderBoiSkin;
 
     /**
      * The constructor for the SpiderBoi object, calls the parent constructor,
      * initialises the speed of the SpiderBoi, initialises the image of the SpiderBoi in all four directions,
      * and creates an ArrayList to get the stopping locations on the obstacles.
      */
-    public SpiderBoi(String fileName) {
-        super(fileName);
+    public SpiderBoi(SpiderBoiSkin spiderBoiSkin) {
+        super(spiderBoiSkin.getDownSpiderBoi());
+        this.spiderBoiSkin = spiderBoiSkin;
         speed = 0;
         velocity = new Vector2(0, 0);
         stopLocations = new ArrayList<Vector2>();
-        setImage(spiderBoiRight);
+        //setImage(spiderBoiRight);
         onObstacle = true;
     }
 
@@ -109,7 +109,7 @@ public class SpiderBoi extends Boi {
      * This method helps the SpiderBoi move to the right, and sets the velocity to 20.
      */
     public void moveRight() {
-        setImage(spiderBoiRight);
+        setImage(spiderBoiSkin.getRightSpiderBoi());
         velocity.set(20, 0);
     }
 
@@ -117,7 +117,7 @@ public class SpiderBoi extends Boi {
      * This method helps the SpiderBoi move to the left, and sets the velocity to 20.
      */
     public void moveLeft() {
-        setImage(spiderBoiLeft);
+        setImage(spiderBoiSkin.getLeftSpiderBoi());
         velocity.set(-20, 0);
     }
 
@@ -125,7 +125,7 @@ public class SpiderBoi extends Boi {
      * This method helps the SpiderBoi move to the up, and sets the velocity to 20.
      */
     public void moveUp() {
-        setImage(spiderBoiUp);
+        setImage(spiderBoiSkin.getUpSpiderBoi());
         velocity.set(0, 20);
     }
 
@@ -133,14 +133,8 @@ public class SpiderBoi extends Boi {
      * This method helps the SpiderBoi move to the doen, and sets the velocity to 20.
      */
     public void moveDown() {
-        setImage(spiderBoiDown);
+        setImage(spiderBoiSkin.getDownSpiderBoi());
         velocity.set(0, -20);
     }
-
-    //public Vector2 getLastVelocity()
-    //{
-    //    return lastVelocity;
-    //}
-
 
 }

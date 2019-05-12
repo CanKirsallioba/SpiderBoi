@@ -4,6 +4,7 @@ public abstract class Achievement {
     private String name;
     private String description;
     private boolean conditionSatisfied;
+    private static int totalKnots;
 
     /**
      * This is the constructor for the Achievements object initialises name, description, and conditionSatified.
@@ -15,6 +16,12 @@ public abstract class Achievement {
         this.description = description;
         conditionSatisfied = false;
     }
+
+    public static int getTotalKnots() { return totalKnots; }
+
+    public static void setTotalKnots(int setTo) { totalKnots = setTo; }
+
+    public static void incrementTotalKnots() { totalKnots++; }
 
     /**
      * An abstract method that checks is the conditions are met.
