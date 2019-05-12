@@ -18,10 +18,12 @@ public class KnotFlyBoi
         super(new Texture("knotFlyBoi.png"), x, y);
     }
 
-    //methods
+    // methods
+
     /**
-     * A method which performs the interaction when a KnotFlyBoi is collected.
-     * @param game The game instance.
+     * This method is the interaction for the knotFlyBoi, sets the
+     * presence to false, and removes one knot.
+     * @param game is the SpiderBoiGame class' instance.
      */
     @Override
     public void performInteraction(SpiderBoiGame game) {

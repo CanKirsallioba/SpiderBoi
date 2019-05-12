@@ -25,12 +25,12 @@ public abstract class CollectableBoi
         super(texture, x, y);
     }
 
-    //methods
+    // methods
 
     /**
-     * An abstract method which performs the interaction when a particular
-     * CollectableBoi is collected.
-     * @param game The game instance.
+     * This method is an abstract method which performs certain interactions
+     * depending on the type of the boi.
+     * @param game is the SpiderBoiGame class' instance.
      */
     public abstract void performInteraction(SpiderBoiGame game);
 }

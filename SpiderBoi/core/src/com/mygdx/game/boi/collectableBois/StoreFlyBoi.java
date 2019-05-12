@@ -23,10 +23,12 @@ public class StoreFlyBoi
         super(new Texture("storeFlyBoi.png"), x, y);
     }
 
-    //methods
+    // methods
+
     /**
-     * A method which performs the interaction when a StoreFlyBoi is collected.
-     * @param game The game instance.
+     * This method is the interaction provider method for the store fly boi,
+     * it increments the general flyboi count.
+     * @param game is the SpiderBoiGame class' instance.
      */
     @Override
     public void performInteraction(SpiderBoiGame game) {

@@ -12,9 +12,9 @@ public class Boi {
     protected Texture image;
     private boolean isPresent;
 
-    //constructor(s)
+    //constructors
     /**
-     * Creates a boi with the given Texture.
+     * This constructor initialises the texture, the status of being present and the position.
      * @param texture The image of the Boi.
      */
     public Boi(Texture texture) {
