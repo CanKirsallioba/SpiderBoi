@@ -38,7 +38,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		batch = new SpriteBatch();
 		textBatch = new SpriteBatch();
 		sp = new SpiderBoi("SpiderBD.jpeg");
-		background = new Texture("background3.png");
+		background = new Texture("backgroundSpiked3.png");
 		silk = new SpiderSilk(sp);
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
