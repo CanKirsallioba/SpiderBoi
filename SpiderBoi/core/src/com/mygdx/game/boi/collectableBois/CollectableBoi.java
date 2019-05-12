@@ -29,6 +29,12 @@ public abstract class CollectableBoi
     }
 
     // methods
+
+    /**
+     * It is an abstract method which performs certain interactions
+     * depending on the type of the boi.
+     * @param game is the SpiderBoiGame class' instance.
+     */
     public abstract void performInteraction(SpiderBoiGame game);
 }
 

@@ -19,6 +19,12 @@ public class KnotFlyBoi
     }
 
     // methods
+
+    /**
+     * This method is the interaction for the knotFlyBoi, sets the
+     * presence to false, and removes one knot.
+     * @param game is the SpiderBoiGame class' instance.
+     */
     @Override
     public void performInteraction(SpiderBoiGame game)
     {

@@ -27,6 +27,12 @@ public class StoreFlyBoi
     }
 
     // methods
+
+    /**
+     * This method is the interaction provider method for the store fly boi,
+     * it increments the general flyboi count.
+     * @param game is the SpiderBoiGame class' instance.
+     */
     @Override
     public void performInteraction(SpiderBoiGame game)
     {

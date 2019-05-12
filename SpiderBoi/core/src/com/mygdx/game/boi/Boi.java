@@ -12,6 +12,9 @@ public class Boi {
     boolean isPresent;
 
     //constructors
+    /**
+     * This constructor initialises the image, the status of being present and the position.
+     */
     public Boi(Texture texture) {
         image = texture;
         position = new Vector2(0,0);
@@ -81,10 +84,18 @@ public class Boi {
         batch.draw(image, position.x, position.y);
     }
 
+    /**
+     * This method checks if the boi object is present.
+     * @return whether or not the boi object is present.
+     */
     public boolean isPresent() {
         return isPresent;
     }
 
+    /**
+     * This method sets the status of the boi's presence.
+     * @param isPresent is the status of the boi's presence.
+     */
     public void setPresent(boolean isPresent) {
         this.isPresent = isPresent;
     }

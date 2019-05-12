@@ -18,6 +18,11 @@ public class ImmunityFlyBoi
     }
 
     //methods
+
+    /**
+     * This method is the interaction provider for the immunity flyBoi.
+     * @param game is the SpiderBoiGame class' instance.
+     */
     @Override
     public void performInteraction(SpiderBoiGame game)
     {
