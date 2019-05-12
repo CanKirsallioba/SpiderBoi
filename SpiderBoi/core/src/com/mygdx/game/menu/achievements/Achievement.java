@@ -4,7 +4,7 @@ public abstract class Achievement {
     private String name;
     private String description;
     private boolean conditionSatisfied;
-    private static int totalKnots;
+    private static int totalKnots = 0;
 
     /**
      * This is the constructor for the Achievements object initialises name, description, and conditionSatified.

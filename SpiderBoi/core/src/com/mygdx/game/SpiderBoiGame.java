@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,11 +18,9 @@ import java.util.Scanner;
 
 public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
 
-    static FileHandle gameStats;
-    static Scanner scanStats;
+    Preferences savedState;
     static final float SWIPE_THRESHOLD = 80;
 	SpriteBatch batch;
-	SpriteBatch textBatch;
 	SpiderBoi sp;
 	private Vector2 lastTouch;
 	PlainObstacle plObs;
@@ -37,22 +36,41 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public void create() {
-	    gameStats = Gdx.files.internal("save.txt");
-	    scanStats = new Scanner(gameStats.readString());
         store = new Store();
-		batch = new SpriteBatch();
-		textBatch = new SpriteBatch();
-		sp = new SpiderBoi(store.getSelectedSpiderBoiSkin());
-		background = store.getSelectedSpiderBoiBackground();
-		silk = new SpiderSilk(sp);
-		Gdx.input.setInputProcessor(this);
-		isTouching = false;
-		gameLevel = new Level(2);
-		gameLevel.showLevel(sp);
-		knotLabel = new BitmapFont();
-		knotLabel.setUseIntegerPositions(false);
-		knotLabel.getData().setScale(3, 3);
-		knotLabel.setColor(1f, 1f, 1f, 1f);
+        initializeVisuals();
+        initializeSpiderBoi();
+        adjustScreen();
+		loadLevel();
+		loadLabels();
+		loadSavedState();
+	}
+
+	public void initializeVisuals() {
+        batch = new SpriteBatch();
+        background = store.getSelectedSpiderBoiBackground();
+    }
+
+	public void initializeSpiderBoi() {
+        sp = new SpiderBoi(store.getSelectedSpiderBoiSkin());
+        silk = new SpiderSilk(sp);
+        lastDirection = "n";
+    }
+
+	public void adjustScreen() {
+        Gdx.input.setInputProcessor(this);
+        isTouching = false;
+    }
+
+	public void loadLevel() {
+        gameLevel = new Level(2);
+        gameLevel.showLevel(sp);
+    }
+
+	public void loadLabels() {
+        knotLabel = new BitmapFont();
+        knotLabel.setUseIntegerPositions(false);
+        knotLabel.getData().setScale(3, 3);
+        knotLabel.setColor(1f, 1f, 1f, 1f);
         storeFlyBoiLabel = new BitmapFont();
         storeFlyBoiLabel.setUseIntegerPositions(false);
         storeFlyBoiLabel.getData().setScale(3, 3);
@@ -61,19 +79,18 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
         totalKnotsLabel.setUseIntegerPositions(false);
         totalKnotsLabel.getData().setScale(3, 3);
         totalKnotsLabel.setColor(1f, 1f, 1f, 1f);
-		lastDirection = "n";
-		loadSaved();
-	}
+    }
 
-    public void loadSaved() {
-        while(scanStats.hasNext()) {
-            String stats = scanStats.next();
-            if (stats.equals("sfb")) {
-                store.setTotalFlyBoi(Integer.parseInt(scanStats.next()));
-            } else if (stats.equals("tk")) {
-                Achievement.setTotalKnots(Integer.parseInt(scanStats.next()));
-            }
+	public void loadSavedState() {
+        savedState = Gdx.app.getPreferences("com.mygdx.game.save");
+        if (savedState.getInteger("storeFlyBoi") != 0
+                || savedState.getInteger("totalKnots") != 0) {
+            savedState.putInteger("storeFlyBoi", 0);
+            savedState.putInteger("totalKnots", 0);
         }
+
+        store.setTotalFlyBoi(savedState.getInteger("storeFlyBoi"));
+        Achievement.setTotalKnots(savedState.getInteger("totalKnots"));
     }
 
 	public void renderBackground() {
@@ -123,6 +140,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public void dispose () {
+	    savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
+	    savedState.putInteger("totalKnots", Achievement.getTotalKnots());
+	    savedState.flush();
 		batch.dispose();
 		sp.getImage().dispose();
 	}
@@ -181,100 +201,52 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	}
 
 	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
+	public boolean mouseMoved(int screenX, int screenY) { return false; }
 
 	@Override
-	public boolean scrolled(int amount) {
-		return false;
-	}
+	public boolean scrolled(int amount) { return false; }
 
-    //public static FileHandle getGameStats() { return gameStats; }
-
-    //public static Scanner getScanStats() { return scanStats; }
-
+	//getters
     public static float getSwipeThreshold() { return SWIPE_THRESHOLD; }
 
     public SpriteBatch getBatch() { return batch; }
 
-    public SpriteBatch getTextBatch() { return textBatch; }
-
     public SpiderBoi getSpiderBoi() { return sp; }
 
-    public Vector2 getLastTouch() {
-        return lastTouch;
-    }
+    public Vector2 getLastTouch() { return lastTouch; }
 
-    public PlainObstacle getPlObs() {
-        return plObs;
-    }
+    public PlainObstacle getPlObs() { return plObs; }
 
-    public boolean isTouching() {
-        return isTouching;
-    }
+    public boolean isTouching() { return isTouching; }
 
-    public SpiderSilk getSilk() {
-        return silk;
-    }
+    public SpiderSilk getSilk() { return silk; }
 
-    public Level getGameLevel() {
-        return gameLevel;
-    }
+    public Level getGameLevel() { return gameLevel; }
 
-    public BitmapFont getKnotLabel() {
-        return knotLabel;
-    }
+    public BitmapFont getKnotLabel() { return knotLabel; }
 
-    public String getLastDirection() {
-        return lastDirection;
-    }
+    public String getLastDirection() { return lastDirection; }
 
-    public Texture getBackground() {
-        return background;
-    }
+    public Texture getBackground() { return background; }
 
-    public void setBatch(SpriteBatch batch) {
-        this.batch = batch;
-    }
+    //setters
+    public void setBatch(SpriteBatch batch) { this.batch = batch; }
 
-    public void setTextBatch(SpriteBatch textBatch) {
-        this.textBatch = textBatch;
-    }
+    public void setSpiderBoi(SpiderBoi sp) { this.sp = sp; }
 
-    public void setSpiderBoi(SpiderBoi sp) {
-        this.sp = sp;
-    }
+    public void setLastTouch(Vector2 lastTouch) { this.lastTouch = lastTouch; }
 
-    public void setLastTouch(Vector2 lastTouch) {
-        this.lastTouch = lastTouch;
-    }
+    public void setPlObs(PlainObstacle plObs) { this.plObs = plObs; }
 
-    public void setPlObs(PlainObstacle plObs) {
-        this.plObs = plObs;
-    }
+    public void setTouching(boolean touching) { isTouching = touching; }
 
-    public void setTouching(boolean touching) {
-        isTouching = touching;
-    }
+    public void setSilk(SpiderSilk silk) { this.silk = silk; }
 
-    public void setSilk(SpiderSilk silk) {
-        this.silk = silk;
-    }
+    public void setGameLevel(Level gameLevel) { this.gameLevel = gameLevel; }
 
-    public void setGameLevel(Level gameLevel) {
-        this.gameLevel = gameLevel;
-    }
+    public void setKnotLabel(BitmapFont knotLabel) { this.knotLabel = knotLabel; }
 
-    public void setKnotLabel(BitmapFont knotLabel) {
-        this.knotLabel = knotLabel;
-    }
+    public void setLastDirection(String lastDirection) { this.lastDirection = lastDirection; }
 
-    public void setLastDirection(String lastDirection) {
-        this.lastDirection = lastDirection;
-    }
-
-    public void setBackground(Texture background) {
-        this.background = background;
-    }
+    public void setBackground(Texture background) { this.background = background; }
 }
