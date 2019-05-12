@@ -12,6 +12,7 @@ import com.mygdx.game.obstacles.Obstacle;
 import com.mygdx.game.obstacles.PlainObstacle;
 import com.mygdx.game.obstacles.SlipperyObstacle;
 import com.mygdx.game.obstacles.SpikyObstacle;
+import com.mygdx.game.obstacles.WinObstacle;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -70,6 +71,11 @@ public class Level {
             else if(objectType.equals("sp"))
             {
                 spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
+                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+            }
+            else if(objectType.equals("wn"))
+            {
+                obstacles.add(new WinObstacle((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
                         Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("sfb"))
