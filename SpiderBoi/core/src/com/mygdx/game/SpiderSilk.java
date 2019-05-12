@@ -9,9 +9,12 @@ import com.mygdx.game.boi.*;
 
 
 import java.util.ArrayList;
-
 import static java.lang.Math.min;
 
+ /**Spider silk class. SpiderBoi leaves a trail of SpiderSilk behind him when moving.
+  * @author JavaBoiz
+  * @version 13.05.2019
+  */
 public class SpiderSilk {
 
     //properties
@@ -21,9 +24,7 @@ public class SpiderSilk {
     private int lastHit = -1;
     ArrayList<Rectangle> silkList;
 
-    /**
-     * Constructor for the SpiderSilk class initialises the spiderBoi, knotcount, shaperenderer, and silklist.
-     *
+   /** Constructor for the SpiderSilk class initialises the spiderBoi, knotcount, shaperenderer, and silklist.
      * @param spB is the spiderBoi main character of the game, which will be used for the location in this class.
      */
     public SpiderSilk(SpiderBoi spB) {
@@ -34,8 +35,6 @@ public class SpiderSilk {
     }
 
     //methods
-
-
     public boolean checkKnot () {
         if(spiderBoi.getVelocity().isZero()){
             lastHit = silkList.size()-1;
@@ -78,7 +77,6 @@ public class SpiderSilk {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(1, 1, 1, 1);
 
-
         for (int i = 0; i < silkList.size(); i++) {
             //shapeRenderer.rectLine(spiderBoi.getStopLocations().get(i), spiderBoi.getStopLocations().get(i + 1), 10);
             Rectangle tmp = silkList.get(i);
@@ -88,16 +86,21 @@ public class SpiderSilk {
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
         shapeRenderer.end();
-
-
     }
 
+    /** Getter method that returns the current number of knots.
+      * @return the knotCount.
+      */
     public int getKnotCount() {
         return knotCount;
     }
 
+    /** Increases the number of knots by 1.
+      */
     public void addKnot() { knotCount++; }
 
+    /** Decreases the number of knots by 1.
+      */
     public void removeKnot() {
         knotCount--;
     }
