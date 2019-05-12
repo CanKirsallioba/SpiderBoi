@@ -2,7 +2,6 @@ package com.mygdx.game.interfaces;
 
 
 import com.mygdx.game.SpiderBoiGame;
-import com.mygdx.game.boi.SpiderBoi;
 
 /** Used for distinguishing objects that are interactable.
  * @author JavaBoiz

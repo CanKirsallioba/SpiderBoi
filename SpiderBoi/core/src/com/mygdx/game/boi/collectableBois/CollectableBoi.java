@@ -1,11 +1,9 @@
 package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.SpiderBoiGame;
 import com.mygdx.game.interfaces.Interactable;
 import com.mygdx.game.boi.FlyBoi;
-import com.mygdx.game.boi.SpiderBoi;
 
 /** Super class of non-moving and collectable FlyBois.
  * @author JavaBoiz
@@ -14,21 +12,26 @@ import com.mygdx.game.boi.SpiderBoi;
 
 public abstract class CollectableBoi
         extends FlyBoi
-        implements Interactable
-{
+        implements Interactable {
 
-    // constructors
+    //constructor(s)
     /**
-     * This is the constructor for the CollectableBoi calls the
-     * parent constructor, interactable interface and creates an
-     * instance of cBSpriteBatch.
+     * Creates a CollectableBoi with given texture and coordinates.
+     * @param texture The texture of the CollectableBoi.
+     * @param x X-coordinate of CollectableBoi.
+     * @param y Y-coordinate of CollectableBoi.
      */
-    public CollectableBoi(Texture texture, int x, int y)
-    {
+    public CollectableBoi(Texture texture, int x, int y) {
         super(texture, x, y);
     }
 
-    // methods
+    //methods
+
+    /**
+     * An abstract method which performs the interaction when a particular
+     * CollectableBoi is collected.
+     * @param game The game instance.
+     */
     public abstract void performInteraction(SpiderBoiGame game);
 }
 

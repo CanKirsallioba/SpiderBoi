@@ -1,10 +1,7 @@
 package com.mygdx.game.boi.collectableBois;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.SpiderBoiGame;
-import com.mygdx.game.boi.SpiderBoi;
-import com.mygdx.game.boi.collectableBois.*;
 import com.mygdx.game.menu.store.Store;
 
 /** FlyBois that can be collected and used to purchase skins and backgrounds in the store.
@@ -14,24 +11,26 @@ import com.mygdx.game.menu.store.Store;
 public class StoreFlyBoi
         extends CollectableBoi
 {
-    // constructors
+    //constructor(s)
     /**
      * This is the constructor for the StoreFlyBoi class.
      * Calls the parent constructor and initialises the position.
-     * @param x is the initial x coordinate of the StoreFlyBoi
-     * @param y is the initial y coordinate of the StoreFlyBoi
+     * @param x is the initial x coordinate of the StoreFlyBoi.
+     * @param y is the initial y coordinate of the StoreFlyBoi.
      */
     public StoreFlyBoi(int x, int y)
     {
         super(new Texture("storeFlyBoi.png"), x, y);
     }
 
-    // methods
+    //methods
+    /**
+     * A method which performs the interaction when a StoreFlyBoi is collected.
+     * @param game The game instance.
+     */
     @Override
-    public void performInteraction(SpiderBoiGame game)
-    {
-        if (game.getSpiderBoi().getBoundary().overlaps(getBoundary()))
-        {
+    public void performInteraction(SpiderBoiGame game) {
+        if (game.getSpiderBoi().getBoundary().overlaps(getBoundary())) {
             setPresent(false);
             Store.incrementTotalFlyBoi();
         }

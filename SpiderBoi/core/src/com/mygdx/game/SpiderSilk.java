@@ -24,7 +24,7 @@ public class SpiderSilk {
     private int lastHit = -1;
     ArrayList<Rectangle> silkList;
 
-   /** Constructor for the SpiderSilk class initialises the spiderBoi, knotcount, shaperenderer, and silklist.
+   /** Constructor for the SpiderSilk class initialises the spiderBoi, knotCount, shapeRenderer, and silkList.
      * @param spB is the spiderBoi main character of the game, which will be used for the location in this class.
      */
     public SpiderSilk(SpiderBoi spB) {
@@ -54,7 +54,7 @@ public class SpiderSilk {
     }
 
     /**
-     * This method draws the silk coming out of the spiderBoi, taking the endpoint as th emiddle of the spiderBoi image
+     * This method draws the silk coming out of the spiderBoi, taking the endpoint as th middle of the spiderBoi image
      * it stops drawing when it reaches an obstacle, so when it's velocity is zero.
      */
     public void drawSilk() {
@@ -88,19 +88,22 @@ public class SpiderSilk {
         shapeRenderer.end();
     }
 
-    /** Getter method that returns the current number of knots.
-      * @return the knotCount.
-      */
+    /**
+     * Getter method that returns the current number of knots.
+     * @return the knotCount.
+     */
     public int getKnotCount() {
         return knotCount;
     }
 
-    /** Increases the number of knots by 1.
-      */
+    /**
+     * Increases the number of knots by 1.
+     */
     public void addKnot() { knotCount++; }
 
-    /** Decreases the number of knots by 1.
-      */
+    /**
+     * Decreases the number of knots by 1.
+     */
     public void removeKnot() {
         knotCount--;
     }

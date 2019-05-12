@@ -6,12 +6,17 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Boi {
+
     //properties
     private Vector2 position;
-    private Texture image;
-    boolean isPresent;
+    protected Texture image;
+    private boolean isPresent;
 
-    //constructors
+    //constructor(s)
+    /**
+     * Creates a boi with the given Texture.
+     * @param texture The image of the Boi.
+     */
     public Boi(Texture texture) {
         image = texture;
         position = new Vector2(0,0);
@@ -50,8 +55,7 @@ public class Boi {
      * Gets the boundaries for the rectangle shaped image.
      * @return the sizes of the rectangle surrounding the object.
      */
-    public Rectangle getBoundary()
-    {
+    public Rectangle getBoundary() {
         return new Rectangle(position.x, position.y, image.getWidth(), image.getHeight());
     }
 
@@ -73,7 +77,7 @@ public class Boi {
     }
 
     /**
-     * This method draws the SpriteBatch (the character) .
+     * This method draws the SpriteBatch (the character).
      * @param batch is the texture of the desired character.
      */
     public void draw(SpriteBatch batch)
@@ -81,10 +85,18 @@ public class Boi {
         batch.draw(image, position.x, position.y);
     }
 
+    /**
+     * This method indicates whether the Boi is displayed on the screen or not.
+     * @return true if the Boi is displayed, false otherwise.
+     */
     public boolean isPresent() {
         return isPresent;
     }
 
+    /**
+     * This method sets whether the Boi will be displayed or not.
+     * @param isPresent true if the Boi will be displayed, false otherwise.
+     */
     public void setPresent(boolean isPresent) {
         this.isPresent = isPresent;
     }

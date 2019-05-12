@@ -37,7 +37,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public void create() {
         savedState = Gdx.app.getPreferences("com.mygdx.game.gameState");
-        store = new Store();
+        store = new Store(savedState);
         initializeVisuals();
         initializeSpiderBoi();
         adjustScreen();

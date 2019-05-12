@@ -12,10 +12,11 @@ public class SpiderBoi
     //properties
     private float speed;
     private Vector2 velocity;
-    boolean onObstacle;
-    ArrayList<Vector2> stopLocations;
-    SpiderBoiSkin spiderBoiSkin;
+    private boolean onObstacle;
+    private ArrayList<Vector2> stopLocations;
+    private SpiderBoiSkin spiderBoiSkin;
 
+    //constructor(s)
     /**
      * The constructor for the SpiderBoi object, calls the parent constructor,
      * initialises the speed of the SpiderBoi, initialises the image of the SpiderBoi in all four directions,
@@ -27,12 +28,10 @@ public class SpiderBoi
         speed = 0;
         velocity = new Vector2(0, 0);
         stopLocations = new ArrayList<Vector2>();
-        //setImage(spiderBoiRight);
         onObstacle = true;
     }
 
     //methods
-
     /**
      * Gets the status of the SpiderBoi regarding being on the obstacle or not.
      * @return true or false considering being on a obstacle.

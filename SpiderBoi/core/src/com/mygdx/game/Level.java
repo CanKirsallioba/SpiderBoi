@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 import com.mygdx.game.boi.collectableBois.CollectableBoi;
-import com.mygdx.game.boi.collectableBois.ImmunityFlyBoi;
 import com.mygdx.game.boi.collectableBois.KnotFlyBoi;
 import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 import com.mygdx.game.obstacles.Obstacle;
@@ -20,8 +19,8 @@ import java.util.Scanner;
 public class Level {
 
     //properties
-    Scanner mapScan;
-    int levelNo;
+    private Scanner mapScan;
+    private int levelNo;
     ArrayList<Obstacle> obstacles;
     ArrayList<CollectableBoi> collectableBois;
 
@@ -44,7 +43,7 @@ public class Level {
     //methods
 
     /**
-     * This method scans the .txt file and puts the related objects in the given positions
+     * This method scans the .txt file and puts the related objects in the given positions.
      * @param spiderBoi is the main character of the game since it will interact with the environment it is
      *                  taken as a parameter.
      */
@@ -81,11 +80,6 @@ public class Level {
             else if(objectType.equals("sfb"))
             {
                 collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
-            }
-            else if(objectType.equals("ifb"))
-            {
-                collectableBois.add(new ImmunityFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
                         Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
             }
             else if(objectType.equals("kfb"))
