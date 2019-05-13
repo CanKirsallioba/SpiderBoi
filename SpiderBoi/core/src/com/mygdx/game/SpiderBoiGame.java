@@ -48,6 +48,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	public void initializeVisuals() {
         batch = new SpriteBatch();
+        store.selectBackground(3);
         background = store.getSelectedSpiderBoiBackground();
     }
 
@@ -103,10 +104,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	public void render() {
 		batch.begin();
 		renderBackground();
-		for (int i = 0; i < gameLevel.obstacles.size(); i++)
+		for (int i = 0; i < gameLevel.getObstacles().size(); i++)
 		{
-			gameLevel.obstacles.get(i).draw(batch);
-			gameLevel.obstacles.get(i).checkCollision(sp);
+			gameLevel.getObstacles().get(i).draw(batch);
+			gameLevel.getObstacles().get(i).checkCollision(sp);
 
 		}
 		for (int i = 0; i < gameLevel.collectableBois.size(); i++)
@@ -123,7 +124,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			Achievement.incrementTotalKnots();
 		}
 
-		if (sp.isPresent()) {
+		if (!isGameOver()) {
 			sp.draw(batch);
 		}
 
@@ -133,7 +134,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 		batch.end();
 
-		if (sp.isPresent())
+		if (!isGameOver())
 			silk.drawSilk();
 
 		sp.move();
@@ -150,6 +151,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
         for (int index = 0; index < store.getSpiderBoiBackgroundUnlockedList().size(); index++)
             savedState.putString("unlockedBackgrounds", store.getUnlockedBackgroundData());
 
+        System.out.println(store.indexOfSelectedBackground());
+        System.out.println(store.indexOfSelectedSkin());
         savedState.putInteger("selectedSkin", store.indexOfSelectedSkin());
         savedState.putInteger("selectedBackground", store.indexOfSelectedBackground());
 
@@ -220,6 +223,22 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public boolean scrolled(int amount) { return false; }
+
+	public boolean isGameOver() {
+	    if (gameLevel.getMaxAllowedKnots() < silk.getKnotCount()) {
+	        return true;
+        }
+
+        if (sp.getPosition().x + sp.getImage().getWidth() / 2 > Gdx.graphics.getWidth()
+                || sp.getPosition().x < 0
+                || sp.getPosition().y + sp.getImage().getHeight() / 2 > Gdx.graphics.getHeight()
+                || sp.getPosition().y < 0) {
+            sp.getVelocity().setZero();
+            return true;
+        }
+
+        return false;
+    }
 
 	//getters
     public static float getSwipeThreshold() { return SWIPE_THRESHOLD; }

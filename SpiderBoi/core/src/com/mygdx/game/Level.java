@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class Level {
 
     //properties
+    static int maxAllowedKnots;
     private Scanner mapScan;
     private int levelNo;
     ArrayList<Obstacle> obstacles;
@@ -38,6 +39,12 @@ public class Level {
         obstacles = new ArrayList<Obstacle>();
         collectableBois = new ArrayList<CollectableBoi>();
         mapScan = new Scanner(levelFile.readString());
+        if (levelNo == 1) {
+            maxAllowedKnots = 3;
+        }
+        else if (levelNo == 2) {
+            maxAllowedKnots = 2;
+        }
     }
 
     //methods
@@ -90,5 +97,44 @@ public class Level {
         }
     }
 
+    /**
+     * This method returns the obstacle list to check collision
+     * return The list of obstacles
+     */
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
+    /**
+     * This method returns the number of maximum allowed knots.
+     * @return The number of maximum allowed knots.
+     */
+    public int getMaxAllowedKnots() {
+        return maxAllowedKnots;
+    }
+
+    /**
+     * This method sets the number maximum allowed knots to given value
+     * @param maxAllowedKnots The value to set the number of maximum knots to.
+     */
+    public void setMaxAllowedKnots(int maxAllowedKnots) {
+        this.maxAllowedKnots = maxAllowedKnots;
+    }
+
+    /**
+     * This method returns the level number.
+     * @return The level number.
+     */
+    public int getLevelNo() {
+        return levelNo;
+    }
+
+    /**
+     * This method sets the level number
+     * @param levelNo The level number to set to.
+     */
+    public void setLevelNo(int levelNo) {
+        this.levelNo = levelNo;
+    }
 
 }

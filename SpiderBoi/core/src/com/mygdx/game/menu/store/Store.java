@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class Store {
 
     //Properties
-    static final String[] defaultSkin = {"SpiderBD.png", "SpiderBR.png", "SpiderBU.png", "SpiderBL.png"};
+    static final String[] DEFAULT_SKIN = {"SpiderBD.png", "SpiderBR.png", "SpiderBU.png", "SpiderBL.png"};
 
-    static final String defaultBackground = "background.png";
-    static final String sunsetBackground = "background2.png";
-    static final String arcticBackground = "backgroundSpiked3.png";
-    static final String cityBackground = "background4.png";
+    static final String DEFAULT_BACKGROUND = "background.png";
+    static final String SUNSET_BACKGROUND = "background2.png";
+    static final String ARCTIC_BACKGROUND = "backgroundSpiked3.png";
+    static final String CITY_BACKGROUND = "background4.png";
 
     static int totalFlyBoi;
     static ArrayList<SpiderBoiSkin> spiderBoiSkinList;
@@ -37,22 +37,25 @@ public class Store {
         spiderBoiSkinUnlockedList = new ArrayList<SpiderBoiSkin>();
         spiderBoiBackgroundUnlockedList = new ArrayList<SpiderBoiBackground>();
 
-        spiderBoiSkinList.add(new SpiderBoiSkin(defaultSkin, 0));
+        spiderBoiSkinList.add(new SpiderBoiSkin(DEFAULT_SKIN, 0));
 
-        spiderBoiBackgroundList.add(new SpiderBoiBackground(defaultBackground, 0));
-        spiderBoiBackgroundList.add(new SpiderBoiBackground(sunsetBackground, 5));
-        spiderBoiBackgroundList.add(new SpiderBoiBackground(arcticBackground, 10));
-        spiderBoiBackgroundList.add(new SpiderBoiBackground(cityBackground, 15));
+        spiderBoiBackgroundList.add(new SpiderBoiBackground(DEFAULT_BACKGROUND, 0));
+        spiderBoiBackgroundList.add(new SpiderBoiBackground(SUNSET_BACKGROUND, 5));
+        spiderBoiBackgroundList.add(new SpiderBoiBackground(ARCTIC_BACKGROUND, 10));
+        spiderBoiBackgroundList.add(new SpiderBoiBackground(CITY_BACKGROUND, 15));
 
         spiderBoiSkinUnlockedList.add(spiderBoiSkinList.get(0));
         spiderBoiBackgroundUnlockedList.add(spiderBoiBackgroundList.get(0));
 
-        for (int index = 0; index < SpiderBoiGame.getSavedState().getString("unlockedSkins").length(); index++) {
+        totalFlyBoi = savedState.getInteger("storeFlyBoi");
+
+        for (int index = 0; index < savedState.getString("unlockedSkins").length(); index++) {
             spiderBoiSkinUnlockedList.add(spiderBoiSkinList.get(Integer.parseInt(savedState.getString("unlockedSkins").substring(index, index + 1))));
         }
-        for (int index = 0; index < SpiderBoiGame.getSavedState().getString("unlockedBackgrounds").length(); index++) {
+        for (int index = 0; index < savedState.getString("unlockedBackgrounds").length(); index++) {
             spiderBoiBackgroundUnlockedList.add(spiderBoiBackgroundList.get(Integer.parseInt(savedState.getString("unlockedBackgrounds").substring(index, index + 1))));
         }
+
         selectedSpiderBoiSkin = spiderBoiSkinList.get(savedState.getInteger("selectedSkin"));
         selectedSpiderBoiBackground = spiderBoiBackgroundUnlockedList.get(savedState.getInteger("selectedBackground"));
     }
@@ -106,7 +109,7 @@ public class Store {
     }
 
     /**
-     * This method selects a skin at a given index of SpiderBoiSkinList
+     * This method selects a SpiderBoiSkin at a given index of SpiderBoiSkinList
      * @param index the location of a specific SpiderBoiSkin
      * @return a boolean indicating whether the SpiderBoiSkin can be selected or not
      */
@@ -121,7 +124,7 @@ public class Store {
     }
 
     /**
-     * This method selects a skin at a given index of SpiderBoiBackgroundList.
+     * This method selects a SpiderBoiBackground at a given index of SpiderBoiBackgroundList.
      * @param index the location of a specific SpiderBoiBackground
      * @return a boolean indicating whether the SpiderBoiBackground can be selected or not
      */
@@ -236,7 +239,7 @@ public class Store {
         SpiderBoiSkin target = spiderBoiSkinList.get(index);
         if (!spiderBoiSkinUnlockedList.contains(target)) {
             if (target.canUnlock()) {
-                totalFlyBoi = totalFlyBoi - target.getCost();
+                setTotalFlyBoi(totalFlyBoi - target.getCost());
                 selectedSpiderBoiSkin = target;
                 spiderBoiSkinUnlockedList.add(target);
 
@@ -256,7 +259,9 @@ public class Store {
             SpiderBoiBackground target = spiderBoiBackgroundList.get(index);
             if (!spiderBoiBackgroundUnlockedList.contains(target)) {
                 if (target.canUnlock()) {
-                    totalFlyBoi = totalFlyBoi - target.getCost();
+                    System.out.println(totalFlyBoi);
+                    setTotalFlyBoi(totalFlyBoi - target.getCost());
+                    System.out.println(totalFlyBoi);
                     selectedSpiderBoiBackground = target;
                     spiderBoiBackgroundUnlockedList.add(target);
 
