@@ -6,8 +6,7 @@ import com.mygdx.game.menu.store.SpiderBoiSkin;
 
 import java.util.ArrayList;
 
-public class SpiderBoi
-        extends Boi {
+public class SpiderBoi extends Boi {
 
     //properties
     private float speed;

@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.GUI.LevelSelection;
+import com.mygdx.game.GUI.MainMenu;
+import com.mygdx.game.GUI.StoreScreen;
 import com.mygdx.game.boi.*;
 import com.mygdx.game.menu.achievements.Achievement;
 import com.mygdx.game.menu.store.Store;
@@ -37,6 +40,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	int gameState;
 	Texture playButton, storeButton, achievementsButton, exitButton;
 	Rectangle playRect, storeRect, achievementsRect, exitRect;
+	MainMenu mainMenu;
+	LevelSelection levelSelection;
+	//StoreScreen storeScreen;
 
 	@Override
 	public void create() {
@@ -46,10 +52,17 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		initializeVisuals();
 		initializeSpiderBoi();
 		adjustScreen();
-		loadLevel();
 		loadLabels();
 		loadSavedState();
 		initialiseButtons();
+		initialiseMenus();
+	}
+
+	public void initialiseMenus()
+	{
+		mainMenu = new MainMenu();
+		levelSelection = new LevelSelection();
+		//storeScreen = new StoreScreen();
 	}
 
 	public void initialiseButtons()
@@ -80,10 +93,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		isTouching = false;
 	}
 
-	public void loadLevel() {
-		gameLevel = new Level(2);
+	/*public void loadLevel(int x) {
+		gameLevel = new Level(x);
 		gameLevel.showLevel(sp);
-	}
+	}*/
 
 	public void loadLabels() {
 		knotLabel = new BitmapFont();
@@ -120,9 +133,16 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public void render() {
 		if(gameState == 1)
-			mainMenu();
+			mainMenu.draw(batch);
 		else if(gameState == 2)
-			playGame();
+			levelSelection.draw(batch);
+		//else if (gameState == 3)
+		//	storeScreen.draw(batch);
+		else if (gameState == 6)
+			playGame(1);
+		else if (gameState == 7)
+			playGame(2);
+
 	}
 
 	@Override
@@ -132,8 +152,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		sp.getImage().dispose();
 	}
 
-	public void playGame()
+	public void playGame(int level)
 	{
+		gameLevel = new Level(level);
+		gameLevel.showLevel(sp);
 		batch.begin();
 		renderBackground();
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
@@ -173,15 +195,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	}
 
-	public void mainMenu()
-	{
-		batch.begin();
-		batch.draw(playButton, playRect.x, playRect.y);
-		batch.draw(storeButton, storeRect.x, storeRect.y);
-		batch.draw(achievementsButton, achievementsRect.x, achievementsRect.y);
-		batch.draw(exitButton, exitRect.x, exitRect.y);
-		batch.end();
-	}
 
 	public void saveGame() {
 		savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
@@ -219,26 +232,32 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		lastTouch = new Vector2(screenX, screenY);
-		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
-		if (playRect.contains(lastTouchInv))
-			playButton = new Texture("playBut2.png");
-		if (storeRect.contains(lastTouchInv))
-			storeButton = new Texture("storeBut2.png");
-		if (achievementsRect.contains(lastTouchInv))
-			achievementsButton = new Texture("achBut2.png");
-		if (exitRect.contains(lastTouchInv))
-			exitButton = new Texture("exitBut2.png");
-
+		mainMenu.touchDown(screenX, screenY);
+		levelSelection.touchDown(screenX, screenY);
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
-		initialiseButtons();
-		if (playRect.contains(lastTouchInv))
+		mainMenu.resetAll();
+		if (mainMenu.playButtonPressed(lastTouchInv))
+		{
 			gameState = 2;
-		if (exitRect.contains(lastTouchInv))
+			System.out.println(gameState);
+		}
+
+		//else if (mainMenu.storeButtonPressed(lastTouchInv))
+			//gameState = 3;
+		//else if (mainMenu.aboutButtonPressed(lastTouchInv))
+			//gameState = 4;
+		//else if (mainMenu.achievementsButtonPressed(lastTouchInv))
+			//gameState = 5;
+		else if (levelSelection.level1ButtonPressed(lastTouchInv))
+			gameState = 6;
+		else if (levelSelection.level2ButtonPressed(lastTouchInv))
+			gameState = 7;
+		else if (mainMenu.exitButtonPressed(lastTouchInv))
 			System.exit(1);
 		return true;
 	}
@@ -289,13 +308,15 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			return true;
 		}
 
-		for (int index = 0; index < gameLevel.getObstacles().size(); index++) {
+		/*for (int index = 0; index < gameLevel.getObstacles().size(); index++) {
 			if (gameLevel.getObstacles().get(index) instanceof WinObstacle) {
 				if (gameLevel.getObstacles().get(index).checkCollision(sp)) {
-					return true;
+					if (sp.getStopLocations().size() > 1)
+						return true;
 				}
 			}
-		}
+
+		}*/
 
 		return false;
 	}

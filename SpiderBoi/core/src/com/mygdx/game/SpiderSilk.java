@@ -64,11 +64,11 @@ public class SpiderSilk {
                 Vector2 lastLoc = spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1);
                 Vector2 lastLoc2 = spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 2);
                 if (lastLoc.y == lastLoc2.y)
-                    silkList.add(new Rectangle(min(lastLoc.x, lastLoc2.x)-5, lastLoc.y-5,
+                    silkList.add(new Rectangle(min(lastLoc.x, lastLoc2.x)-5, lastLoc.y - 5,
                             Math.abs(lastLoc.x - lastLoc2.x)+10, 10));
 
                 else if (lastLoc.x == lastLoc2.x)
-                    silkList.add(new Rectangle(lastLoc.x-5, min(lastLoc.y, lastLoc2.y)-5,
+                    silkList.add(new Rectangle(lastLoc.x - 5, min(lastLoc.y, lastLoc2.y) - 5,
                             10, Math.abs(lastLoc.y - lastLoc2.y)));
             }
             spiderBoi.setOnObstacle(false);
