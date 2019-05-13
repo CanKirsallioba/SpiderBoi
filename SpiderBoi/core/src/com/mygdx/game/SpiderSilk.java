@@ -58,6 +58,8 @@ public class SpiderSilk {
      * it stops drawing when it reaches an obstacle, so when it's velocity is zero.
      */
     public void drawSilk() {
+
+        //records the stop locations of spiderboi, and the silks to an arraylist
         if (spiderBoi.isOnObstacle()) {
             spiderBoi.getStopLocations().add(spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()));
             if (spiderBoi.getStopLocations().size() > 1) {
@@ -77,14 +79,16 @@ public class SpiderSilk {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(1, 1, 1, 1);
 
+        /*records the stop locations of spiderboi to an arraylist and draws silk segment between two stop locations, and
+        also draws silk between the last stop location and spiderboi */
         for (int i = 0; i < silkList.size(); i++) {
-            //shapeRenderer.rectLine(spiderBoi.getStopLocations().get(i), spiderBoi.getStopLocations().get(i + 1), 10);
             Rectangle tmp = silkList.get(i);
             shapeRenderer.rect(tmp.getX(), tmp.getY(), tmp.getWidth(), tmp.getHeight());
         }
 
         shapeRenderer.rectLine(spiderBoi.getStopLocations().get(spiderBoi.getStopLocations().size() - 1),
                 spiderBoi.getPosition().cpy().add(spiderBoi.getHalfSize()), 10);
+
         shapeRenderer.end();
     }
 

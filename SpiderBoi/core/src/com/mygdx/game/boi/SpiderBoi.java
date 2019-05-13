@@ -24,7 +24,7 @@ public class SpiderBoi extends Boi {
     public SpiderBoi(SpiderBoiSkin spiderBoiSkin) {
         super(spiderBoiSkin.getDownSpiderBoi());
         this.spiderBoiSkin = spiderBoiSkin;
-        speed = 0;
+        speed = 20;
         velocity = new Vector2(0, 0);
         stopLocations = new ArrayList<Vector2>();
         onObstacle = true;
@@ -108,7 +108,7 @@ public class SpiderBoi extends Boi {
      */
     public void moveRight() {
         setImage(spiderBoiSkin.getRightSpiderBoi());
-        velocity.set(20, 0);
+        velocity.set(speed, 0);
     }
 
     /**
@@ -116,7 +116,7 @@ public class SpiderBoi extends Boi {
      */
     public void moveLeft() {
         setImage(spiderBoiSkin.getLeftSpiderBoi());
-        velocity.set(-20, 0);
+        velocity.set(speed*(-1), 0);
     }
 
     /**
@@ -124,7 +124,7 @@ public class SpiderBoi extends Boi {
      */
     public void moveUp() {
         setImage(spiderBoiSkin.getUpSpiderBoi());
-        velocity.set(0, 20);
+        velocity.set(0, speed);
     }
 
     /**
@@ -132,7 +132,7 @@ public class SpiderBoi extends Boi {
      */
     public void moveDown() {
         setImage(spiderBoiSkin.getDownSpiderBoi());
-        velocity.set(0, -20);
+        velocity.set(0, speed*(-1));
     }
 
 }
