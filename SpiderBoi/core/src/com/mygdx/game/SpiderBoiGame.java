@@ -158,7 +158,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			Achievement.incrementTotalKnots();
 		}
 
-		if (sp.isPresent()) {
+		if (!isGameOver()) {
 			sp.draw(batch);
 		}
 
@@ -168,7 +168,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 		batch.end();
 
-		if (sp.isPresent())
+		if (!isGameOver())
 			silk.drawSilk();
 
 		sp.move();
@@ -262,6 +262,22 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public boolean scrolled(int amount) { return false; }
+
+	public boolean isGameOver() {
+		if (gameLevel.getMaxAllowedKnots() < silk.getKnotCount()) {
+			return true;
+		}
+
+		if (sp.getPosition().x + sp.getImage().getWidth() / 2 > Gdx.graphics.getWidth()
+				|| sp.getPosition().x < 0
+				|| sp.getPosition().y + sp.getImage().getHeight() / 2 > Gdx.graphics.getHeight()
+				|| sp.getPosition().y < 0) {
+			sp.getVelocity().setZero();
+			return true;
+		}
+
+		return false;
+	}
 
 	//getters
 	public static float getSwipeThreshold() { return SWIPE_THRESHOLD; }
