@@ -242,11 +242,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
 		mainMenu.resetAll();
 		if (mainMenu.playButtonPressed(lastTouchInv))
-		{
 			gameState = 2;
-			System.out.println(gameState);
-		}
-
 		//else if (mainMenu.storeButtonPressed(lastTouchInv))
 			//gameState = 3;
 		//else if (mainMenu.aboutButtonPressed(lastTouchInv))
@@ -315,7 +311,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 						return true;
 				}
 			}
-
 		}*/
 
 		return false;
