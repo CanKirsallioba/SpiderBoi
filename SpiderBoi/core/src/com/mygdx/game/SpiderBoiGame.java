@@ -41,7 +41,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public void create() {
 		gameState = 1;
-		store = new Store(Gdx.app.getPreferences("com.mygdx.game.save"));
+		savedState = Gdx.app.getPreferences("com.mygdx.game.gameState");
+		store = new Store(savedState);
 		initializeVisuals();
 		initializeSpiderBoi();
 		adjustScreen();
@@ -102,12 +103,11 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 
 	public void loadSavedState() {
-		savedState = Gdx.app.getPreferences("com.mygdx.game.save");
-		if (savedState.getInteger("storeFlyBoi") != 0
-				|| savedState.getInteger("totalKnots") != 0) {
-			savedState.putInteger("storeFlyBoi", 0);
-			savedState.putInteger("totalKnots", 0);
-		}
+		savedState.putInteger("storeFlyBoi", 0);
+		savedState.putInteger("totalKnots", 0);
+		savedState.putString("unlockedSkins", "0");
+		savedState.putString("unlockedBackgrounds", "0");
+
 
 		store.setTotalFlyBoi(savedState.getInteger("storeFlyBoi"));
 		Achievement.setTotalKnots(savedState.getInteger("totalKnots"));
@@ -127,9 +127,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public void dispose () {
-		savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
-		savedState.putInteger("totalKnots", Achievement.getTotalKnots());
-		savedState.flush();
+		saveGame();
 		batch.dispose();
 		sp.getImage().dispose();
 	}
@@ -177,7 +175,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	public void mainMenu()
 	{
-
 		batch.begin();
 		batch.draw(playButton, playRect.x, playRect.y);
 		batch.draw(storeButton, storeRect.x, storeRect.y);
@@ -186,7 +183,23 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		batch.end();
 	}
 
+	public void saveGame() {
+		savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
+		savedState.putInteger("totalKnots", Achievement.getTotalKnots());
 
+		for (int index = 0; index < store.getSpiderBoiSkinUnlockedList().size(); index++)
+			savedState.putString("unlockedSkins", store.getUnlockedSkinData());
+
+		for (int index = 0; index < store.getSpiderBoiBackgroundUnlockedList().size(); index++)
+			savedState.putString("unlockedBackgrounds", store.getUnlockedBackgroundData());
+
+		System.out.println(store.indexOfSelectedBackground());
+		System.out.println(store.indexOfSelectedSkin());
+		savedState.putInteger("selectedSkin", store.indexOfSelectedSkin());
+		savedState.putInteger("selectedBackground", store.indexOfSelectedBackground());
+
+		savedState.flush();
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {

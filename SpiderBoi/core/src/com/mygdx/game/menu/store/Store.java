@@ -44,9 +44,6 @@ public class Store {
         spiderBoiBackgroundList.add(new SpiderBoiBackground(ARCTIC_BACKGROUND, 10));
         spiderBoiBackgroundList.add(new SpiderBoiBackground(CITY_BACKGROUND, 15));
 
-        spiderBoiSkinUnlockedList.add(spiderBoiSkinList.get(0));
-        spiderBoiBackgroundUnlockedList.add(spiderBoiBackgroundList.get(0));
-
         totalFlyBoi = savedState.getInteger("storeFlyBoi");
 
         for (int index = 0; index < savedState.getString("unlockedSkins").length(); index++) {
@@ -58,6 +55,10 @@ public class Store {
 
         selectedSpiderBoiSkin = spiderBoiSkinList.get(savedState.getInteger("selectedSkin"));
         selectedSpiderBoiBackground = spiderBoiBackgroundUnlockedList.get(savedState.getInteger("selectedBackground"));
+        System.out.println(spiderBoiSkinList);
+        System.out.println(spiderBoiSkinUnlockedList);
+        System.out.println(spiderBoiBackgroundList);
+        System.out.println(spiderBoiBackgroundUnlockedList);
     }
 
     //Methods
