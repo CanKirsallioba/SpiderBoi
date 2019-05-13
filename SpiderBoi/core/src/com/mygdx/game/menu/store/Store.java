@@ -143,13 +143,7 @@ public class Store {
      * @return the index of the selected SpiderBoiSkin, -1 if the SpiderBoiSkin is not selectable
      */
     public int indexOfSelectedSkin() {
-        for (int index = 0; index < spiderBoiSkinList.size(); index++) {
-            if (selectedSpiderBoiSkin == spiderBoiSkinList.get(index)) {
-                return index;
-            }
-        }
-
-        return -1;
+        return spiderBoiSkinList.indexOf(selectedSpiderBoiSkin);
     }
 
     /**
@@ -157,13 +151,7 @@ public class Store {
      * @return the index of the selected skin, -1 if the SpiderBoiBackground is not selectable
      */
     public int indexOfSelectedBackground() {
-        for (int index = 0; index < spiderBoiBackgroundList.size(); index++) {
-            if (selectedSpiderBoiBackground == spiderBoiBackgroundList.get(index)) {
-                return index;
-            }
-        }
-
-        return -1;
+        return spiderBoiBackgroundList.indexOf(selectedSpiderBoiBackground);
     }
 
     /**
