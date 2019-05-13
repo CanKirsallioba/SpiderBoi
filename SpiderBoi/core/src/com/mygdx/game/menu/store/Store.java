@@ -12,6 +12,8 @@ public class Store {
 
     //Properties
     static final String[] DEFAULT_SKIN = {"SpiderBD.png", "SpiderBR.png", "SpiderBU.png", "SpiderBL.png"};
+    static final String[] PIRATE_SKIN = {"pirateBD.png", "pirateBR.png", "pirateBU.png", "pirateBL.png"};
+    static final String[] KRATOS_SKIN = {"KratosBoiD.png", "KratosBoiR.png", "KratosBoiU.png", "KratosBoiL.png"};
 
     static final String DEFAULT_BACKGROUND = "background.png";
     static final String SUNSET_BACKGROUND = "background2.png";
@@ -38,6 +40,8 @@ public class Store {
         spiderBoiBackgroundUnlockedList = new ArrayList<SpiderBoiBackground>();
 
         spiderBoiSkinList.add(new SpiderBoiSkin(DEFAULT_SKIN, 0));
+        spiderBoiSkinList.add(new SpiderBoiSkin(PIRATE_SKIN, 10));
+        spiderBoiSkinList.add(new SpiderBoiSkin(KRATOS_SKIN, 15));
 
         spiderBoiBackgroundList.add(new SpiderBoiBackground(DEFAULT_BACKGROUND, 0));
         spiderBoiBackgroundList.add(new SpiderBoiBackground(SUNSET_BACKGROUND, 5));
