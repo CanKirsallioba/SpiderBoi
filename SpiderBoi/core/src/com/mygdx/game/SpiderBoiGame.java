@@ -289,6 +289,14 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			return true;
 		}
 
+		for (int index = 0; index < gameLevel.getObstacles().size(); index++) {
+			if (gameLevel.getObstacles().get(index) instanceof WinObstacle) {
+				if (gameLevel.getObstacles().get(index).checkCollision(sp)) {
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 
