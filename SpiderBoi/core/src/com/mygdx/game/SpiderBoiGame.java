@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -132,15 +133,18 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	@Override
 	public void render() {
+		Gdx.gl.glClearColor(1, 1, 1, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		if(gameState == 1)
 			mainMenu.draw(batch);
-		else if(gameState == 2)
+		else if(gameState == 2) //goes into level selection screen
 			levelSelection.draw(batch);
 		//else if (gameState == 3)
 		//	storeScreen.draw(batch);
-		else if (gameState == 6)
+		else if (gameState == 6) //goes into first level
 			playGame(1);
-		else if (gameState == 7)
+		else if (gameState == 7)//goes into second level
 			playGame(2);
 
 	}
@@ -154,16 +158,24 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	public void playGame(int level)
 	{
-		gameLevel = new Level(level);
-		gameLevel.showLevel(sp);
 		batch.begin();
 		renderBackground();
+
+		//draws each obstacle to the screen and checks the collision of spiderboi and obstacles
 		for (int i = 0; i < gameLevel.obstacles.size(); i++)
 		{
 			gameLevel.obstacles.get(i).draw(batch);
+			if(gameLevel.obstacles.get(i) instanceof WinObstacle)
+			{
+				if (gameLevel.getObstacles().get(i).getBoundary().overlaps(sp.getBoundary()))
+					sp.setVelocity(Vector2.Zero);
+			}
+			else
 			gameLevel.obstacles.get(i).checkCollision(sp);
 
 		}
+
+		//draws present collectable bois and checks for interaction
 		for (int i = 0; i < gameLevel.collectableBois.size(); i++)
 		{
 			if (gameLevel.collectableBois.get(i).isPresent()) {
@@ -172,27 +184,37 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			}
 		}
 
-		Boolean a = silk.checkKnot();
-		if (a) {
+		//if a knot is formed, increments knot number by one
+		if (silk.checkKnot()) {
 			silk.addKnot();
 			Achievement.incrementTotalKnots();
 		}
 
-		if (!isGameOver()) {
-			sp.draw(batch);
-		}
 
+		sp.draw(batch);
+
+		//updates game information labels
 		knotLabel.draw(batch, "Knots: " + silk.getKnotCount(), 50, Gdx.graphics.getHeight() - 50);
 		storeFlyBoiLabel.draw(batch, "StoreFlyBois: " + store.getTotalFlyBoi(), 50, 75);
 		totalKnotsLabel.draw(batch, "Total Knots: " + Achievement.getTotalKnots(), Gdx.graphics.getWidth() - 300, 75);
 
 		batch.end();
 
-		if (!isGameOver())
-			silk.drawSilk();
+
+		silk.drawSilk();
 
 		sp.move();
 
+		if(isGameOver() && level == 1)
+		{
+            initializeSpiderBoi();
+			gameState = 2;
+		}
+		if(isGameOver())
+		{
+            initializeSpiderBoi();
+			gameState = 2;
+		}
 	}
 
 
@@ -246,17 +268,24 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			gameState = 2;
 			System.out.println(gameState);
 		}
-
 		//else if (mainMenu.storeButtonPressed(lastTouchInv))
 			//gameState = 3;
 		//else if (mainMenu.aboutButtonPressed(lastTouchInv))
 			//gameState = 4;
 		//else if (mainMenu.achievementsButtonPressed(lastTouchInv))
 			//gameState = 5;
-		else if (levelSelection.level1ButtonPressed(lastTouchInv))
+		else if (levelSelection.level1ButtonPressed(lastTouchInv)) {
 			gameState = 6;
-		else if (levelSelection.level2ButtonPressed(lastTouchInv))
+			gameLevel = new Level(1);
+			gameLevel.showLevel(sp);
+		}
+		else if (levelSelection.level2ButtonPressed(lastTouchInv)) {
 			gameState = 7;
+			gameLevel = new Level(2);
+			gameLevel.showLevel(sp);
+		}
+		else if (levelSelection.backButtonPressed(lastTouchInv))
+		    gameState = 1;
 		else if (mainMenu.exitButtonPressed(lastTouchInv))
 			System.exit(1);
 		return true;
@@ -308,15 +337,15 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			return true;
 		}
 
-		/*for (int index = 0; index < gameLevel.getObstacles().size(); index++) {
+		for (int index = 0; index < gameLevel.getObstacles().size(); index++) {
 			if (gameLevel.getObstacles().get(index) instanceof WinObstacle) {
-				if (gameLevel.getObstacles().get(index).checkCollision(sp)) {
+				if (gameLevel.getObstacles().get(index).getBoundary().overlaps(sp.getBoundary())) {
 					if (sp.getStopLocations().size() > 1)
 						return true;
 				}
 			}
 
-		}*/
+		}
 
 		return false;
 	}

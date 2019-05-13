@@ -84,9 +84,7 @@ public class Obstacle {
             }
             spiderBoi.getVelocity().setZero();
             spiderBoi.setOnObstacle(true);
-
         }
-
         return spiderBoi.isOnObstacle();
     }
 }

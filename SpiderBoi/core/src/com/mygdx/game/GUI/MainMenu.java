@@ -15,16 +15,16 @@ public class MainMenu {
     //constructor
     public MainMenu()
     {
-        playButton = new Button("playBut1.png", "playBut2.png", 0, 800) ;
-        storeButton = new Button("storeBut1.png", "storeBut2.png", 0, 600);
-        achievementsButton = new Button("achBut1.png", "achBut2.png", 0, 400);
-        //aboutButton = new Button("aboutBut1.png", "aboutBut2.png", 0, 200);
+        playButton = new Button("playBut1.png", "playBut2.png", 0, 680) ;
+        storeButton = new Button("storeBut1.png", "storeBut2.png", 0, 510);
+        achievementsButton = new Button("achBut1.png", "achBut2.png", 0, 340);
+        aboutButton = new Button("aboutBut1.png", "aboutBut2.png", 0, 170);
         exitButton = new Button("exitBut1.png", "exitBut2.png", 0, 0);
         title = new Texture("mainTitle.png");
         playButton.centralize();
         storeButton.centralize();
         achievementsButton.centralize();
-        //aboutButton.centralize();
+        aboutButton.centralize();
         exitButton.centralize();
     }
 
@@ -32,11 +32,11 @@ public class MainMenu {
     public void draw(SpriteBatch batch)
     {
         batch.begin();
-        batch.draw(title, Gdx.graphics.getWidth()/2 - title.getWidth()/2, 1000);
+        batch.draw(title, Gdx.graphics.getWidth()/2 - title.getWidth()/2, 900);
         playButton.draw(batch);
         storeButton.draw(batch);
         achievementsButton.draw(batch);
-        //aboutButton.draw(batch);
+        aboutButton.draw(batch);
         exitButton.draw(batch);
         batch.end();
     }
@@ -46,7 +46,7 @@ public class MainMenu {
         playButton.reset();
         storeButton.reset();
         achievementsButton.reset();
-        //aboutButton.reset();
+        aboutButton.reset();
         exitButton.reset();
     }
 
@@ -59,8 +59,8 @@ public class MainMenu {
             storeButton.setDark();
         else if(achievementsButton.isPressed(lastTouchInv))
             achievementsButton.setDark();
-            //else if (aboutButton.isPressed(lastTouchInv))
-            //aboutButton.setDark();
+        else if (aboutButton.isPressed(lastTouchInv))
+            aboutButton.setDark();
         else if (exitButton.isPressed(lastTouchInv))
             exitButton.setDark();
     }

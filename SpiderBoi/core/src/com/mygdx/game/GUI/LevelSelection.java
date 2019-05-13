@@ -15,8 +15,8 @@ public class LevelSelection {
     public LevelSelection()
     {
         title = new Texture("levelTitle.png");
-        level1Button = new Button("level1But1.png", "level1But2.png", 0, 700);
-        level2Button = new Button("level2But1.png", "level2But2.png", 0, 500);
+        level1Button = new Button("level1But1.png", "level1But2.png", 0, 500);
+        level2Button = new Button("level2But1.png", "level2But2.png", 0, 300);
         backButton = new Button("backBut1.png", "backBut2.png", 100, Gdx.graphics.getHeight() - 100);
         level1Button.centralize();
         level2Button.centralize();
@@ -25,7 +25,7 @@ public class LevelSelection {
     public void draw(SpriteBatch batch)
     {
         batch.begin();
-        batch.draw(title, Gdx.graphics.getWidth()/2 - title.getWidth()/2, 1000);
+        batch.draw(title, Gdx.graphics.getWidth()/2 - title.getWidth()/2, 900);
         level1Button.draw(batch);
         level2Button.draw(batch);
         backButton.draw(batch);
