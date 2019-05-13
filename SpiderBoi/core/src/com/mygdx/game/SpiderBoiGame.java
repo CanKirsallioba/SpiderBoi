@@ -41,7 +41,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public void create() {
 		gameState = 1;
-		store = new Store();
+		store = new Store(Gdx.app.getPreferences("com.mygdx.game.save"));
 		initializeVisuals();
 		initializeSpiderBoi();
 		adjustScreen();
@@ -98,6 +98,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		totalKnotsLabel.getData().setScale(3, 3);
 		totalKnotsLabel.setColor(1f, 1f, 1f, 1f);
 	}
+
+
 
 	public void loadSavedState() {
 		savedState = Gdx.app.getPreferences("com.mygdx.game.save");
