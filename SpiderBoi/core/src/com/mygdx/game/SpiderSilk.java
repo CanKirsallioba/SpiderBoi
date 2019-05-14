@@ -109,7 +109,8 @@ public class SpiderSilk {
      * Decreases the number of knots by 1.
      */
     public void removeKnot() {
-        knotCount--;
+        if(knotCount != 0)
+            knotCount--;
     }
 }
 

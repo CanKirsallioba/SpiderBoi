@@ -163,6 +163,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			playGame(1);
 		else if (gameState == 7)//goes into second level
 			playGame(2);
+		else if (gameState == 8)//goes into second level
+			playGame(3);
 
 	}
 
@@ -221,7 +223,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		sp.draw(batch);
 
 		//updates game information labels
-		knotLabel.draw(batch, "Knots: " + silk.getKnotCount(), 50, Gdx.graphics.getHeight() - 50);
+		knotLabel.draw(batch, "Knots: " + silk.getKnotCount() + "/" + gameLevel.getMaxAllowedKnots(), 50, Gdx.graphics.getHeight() - 50);
 		storeFlyBoiLabel.draw(batch, "StoreFlyBois: " + store.getTotalFlyBoi(), 50, 75);
 		totalKnotsLabel.draw(batch, "Total Knots: " + Achievement.getTotalKnots(), Gdx.graphics.getWidth() - 300, 75);
 
@@ -342,6 +344,11 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			gameLevel = new Level(2);
 			gameLevel.showLevel(sp);
 		}
+		else if (gameState == 2 && levelSelection.level3ButtonPressed(lastTouchInv)) {
+			gameState = 8;
+			gameLevel = new Level(3);
+			gameLevel.showLevel(sp);
+		}
 		else if (gameState == 2 && levelSelection.backButtonPressed(lastTouchInv))
 		    gameState = 1;
 		else if (gameState == 1 && mainMenu.exitButtonPressed(lastTouchInv))
@@ -360,7 +367,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if(gameState == 6 || gameState == 7) {
+		if(gameState == 6 || gameState == 7 || gameState == 8) {
 			Vector2 newTouch = new Vector2(screenX, screenY);
 			if (newTouch.cpy().sub(lastTouch).len() < SWIPE_THRESHOLD)
 				return false;

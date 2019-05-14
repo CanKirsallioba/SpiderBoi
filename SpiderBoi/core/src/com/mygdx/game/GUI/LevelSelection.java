@@ -12,7 +12,7 @@ public class LevelSelection {
 
     //properties
 
-    Button level1Button, level2Button, backButton;
+    Button level1Button, level2Button, level3Button, backButton;
     Texture title;
 
     /**
@@ -21,11 +21,13 @@ public class LevelSelection {
     public LevelSelection()
     {
         title = new Texture("levelTitle.png");
-        level1Button = new Button("level1But1.png", "level1But2.png", 0, 500);
-        level2Button = new Button("level2But1.png", "level2But2.png", 0, 300);
+        level1Button = new Button("level1But1.png", "level1But2.png", 0, 600);
+        level2Button = new Button("level2But1.png", "level2But2.png", 0, 450);
+        level3Button = new Button("level3But1.png", "level3But2.png", 0, 300 );
         backButton = new Button("backBut1.png", "backBut2.png", 100, Gdx.graphics.getHeight() - 100);
         level1Button.centralize();
         level2Button.centralize();
+        level3Button.centralize();
     }
 
     /**
@@ -38,6 +40,7 @@ public class LevelSelection {
         batch.draw(title, Gdx.graphics.getWidth()/2 - title.getWidth()/2, 900);
         level1Button.draw(batch);
         level2Button.draw(batch);
+        level3Button.draw(batch);
         backButton.draw(batch);
         batch.end();
     }
@@ -49,6 +52,7 @@ public class LevelSelection {
     {
         level1Button.reset();
         level2Button.reset();
+        level3Button.reset();
         backButton.reset();
     }
 
@@ -64,6 +68,8 @@ public class LevelSelection {
             level1Button.setDark();
         else if(level2Button.isPressed(lastTouchInv))
             level2Button.setDark();
+        else if(level3Button.isPressed(lastTouchInv))
+            level3Button.setDark();
         else if(backButton.isPressed(lastTouchInv))
             backButton.setDark();
     }
@@ -96,5 +102,15 @@ public class LevelSelection {
     public boolean backButtonPressed(Vector2 pos)
     {
         return backButton.isPressed(pos);
+    }
+
+    /**
+     * A method that checkes if level 3 button is pressed
+     * @param pos the position of the press
+     * @return level2Button.isPressed(pos)
+     */
+    public boolean level3ButtonPressed(Vector2 pos)
+    {
+        return level3Button.isPressed(pos);
     }
 }

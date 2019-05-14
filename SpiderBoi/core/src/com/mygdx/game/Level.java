@@ -40,10 +40,13 @@ public class Level {
         collectableBois = new ArrayList<CollectableBoi>();
         mapScan = new Scanner(levelFile.readString());
         if (levelNo == 1) {
-            maxAllowedKnots = 3;
+            setMaxAllowedKnots(0);
         }
         else if (levelNo == 2) {
-            maxAllowedKnots = 2;
+            setMaxAllowedKnots(1);
+        }
+        else if (levelNo == 3) {
+            setMaxAllowedKnots(3);
         }
     }
 
