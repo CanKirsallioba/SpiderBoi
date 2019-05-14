@@ -58,7 +58,7 @@ public class Store {
         }*/
 
         selectedSpiderBoiSkin = spiderBoiSkinList.get(2);
-        selectedSpiderBoiBackground = spiderBoiBackgroundList.get(0);
+        selectedSpiderBoiBackground = spiderBoiBackgroundList.get(2);
 //        selectedSpiderBoiSkin = spiderBoiSkinList.get(savedState.getInteger("selectedSkin"));
 //        selectedSpiderBoiBackground = spiderBoiBackgroundUnlockedList.get(savedState.getInteger("selectedBackground"));
         System.out.println(spiderBoiSkinList);
