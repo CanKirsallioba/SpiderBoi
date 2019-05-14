@@ -12,6 +12,9 @@ public class LevelSelection {
     Button level1Button, level2Button, backButton;
     Texture title;
 
+    /**
+     * A constructor for the level selection
+     */
     public LevelSelection()
     {
         title = new Texture("levelTitle.png");
@@ -22,6 +25,10 @@ public class LevelSelection {
         level2Button.centralize();
     }
 
+    /**
+     * A method that draws the title and back button and the level buttons
+     * @param batch a SpriteBatch object that helps to draw
+     */
     public void draw(SpriteBatch batch)
     {
         batch.begin();
@@ -32,6 +39,9 @@ public class LevelSelection {
         batch.end();
     }
 
+    /**
+     * A method that resets this class' buttons
+     */
     public void resetAll()
     {
         level1Button.reset();
@@ -39,6 +49,11 @@ public class LevelSelection {
         backButton.reset();
     }
 
+    /**
+     * A method that finds and sets the pressed button dark among other buttons 
+     * @param x the x location of the press
+     * @param y the y location of the press
+     */
     public void touchDown(int x, int y)
     {
         Vector2 lastTouchInv = new Vector2(x, Gdx.graphics.getHeight() - y );
@@ -50,16 +65,31 @@ public class LevelSelection {
             backButton.setDark();
     }
 
+    /**
+     * A method that checkes if level 1 button is pressed
+     * @param pos the position of the press
+     * @return level1Button.isPressed(pos)
+     */
     public boolean level1ButtonPressed(Vector2 pos)
     {
         return level1Button.isPressed(pos);
     }
 
+    /**
+     * A method that checkes if level 2 button is pressed
+     * @param pos the position of the press
+     * @return level2Button.isPressed(pos)
+     */
     public boolean level2ButtonPressed(Vector2 pos)
     {
         return level2Button.isPressed(pos);
     }
 
+    /**
+     * A method that checkes if back button is pressed
+     * @param pos the position of the press
+     * @return backButton.isPressed(pos)
+     */
     public boolean backButtonPressed(Vector2 pos)
     {
         return backButton.isPressed(pos);
