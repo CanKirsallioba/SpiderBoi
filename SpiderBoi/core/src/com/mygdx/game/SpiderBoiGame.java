@@ -4,12 +4,10 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GUI.LevelSelection;
 import com.mygdx.game.GUI.MainMenu;
@@ -19,8 +17,12 @@ import com.mygdx.game.menu.achievements.Achievement;
 import com.mygdx.game.menu.store.Store;
 import com.mygdx.game.obstacles.*;
 
-import java.util.Scanner;
 
+/**
+ * This is the SpiderBoiGame class, the game is created rendered and disposed in here.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor {
 
 	Preferences savedState;
@@ -43,6 +45,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	LevelSelection levelSelection;
 	//StoreScreen storeScreen;
 
+	/**
+	 * This method sets up the game with it's basic features.
+	 */
 	@Override
 	public void create() {
 		gameState = 1;
@@ -56,25 +61,40 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		initialiseMenus();
 	}
 
+	/**
+	 * This method initialises the menus, int detail the main menu,
+	 * and the levelSelection screen.
+	 */
 	public void initialiseMenus()
 	{
 		mainMenu = new MainMenu();
 		levelSelection = new LevelSelection();
-		//storeScreen = new StoreScreen();
+		//storeScreen = new StoreScreen();    --Since we could not have time to implement it it is commented--
 	}
 
-
+	/**
+	 * This method initialises the visuals, in detail
+	 * batch and the background.
+	 */
 	public void initializeVisuals() {
 		batch = new SpriteBatch();
 		background = store.getSelectedSpiderBoiBackground();
 	}
 
+	/**
+	 * This method intialises the spiderBoi (it's constructor takes
+	 * the selected spiderBoiSkin from the store --not implemented--),
+	 * initialises the spiderSilk and sets the last direction.
+	 */
 	public void initializeSpiderBoi() {
 		sp = new SpiderBoi(store.getSelectedSpiderBoiSkin());
 		silk = new SpiderSilk(sp);
 		lastDirection = "n";
 	}
 
+	/**
+	 * This method sets the touch input.
+	 */
 	public void adjustScreen() {
 		Gdx.input.setInputProcessor(this);
 		isTouching = false;
@@ -85,6 +105,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		gameLevel.showLevel(sp);
 	}*/
 
+	/**
+	 * This method prints the labels on the screen.
+	 */
 	public void loadLabels() {
 		knotLabel = new BitmapFont();
 		knotLabel.setUseIntegerPositions(false);
@@ -100,8 +123,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		totalKnotsLabel.setColor(1f, 1f, 1f, 1f);
 	}
 
-
-
+	/**
+	 * This method saves the current state of the game
+	 * such as the total flyBois or totalknots.
+	 */
 	public void loadSavedState() {
 		savedState.putInteger("storeFlyBoi", 0);
 		savedState.putInteger("totalKnots", 0);
@@ -113,10 +138,16 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		Achievement.setTotalKnots(savedState.getInteger("totalKnots"));
 	}
 
+	/**
+	 * This method draws the background and fits it to the screen.
+	 */
 	public void renderBackground() {
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
+	/**
+	 * This method helps the menus to draw themselves, when pressed on certain buttons.
+	 */
 	@Override
 	public void render() {
 		Gdx.gl.glClearColor(1, 1, 1, 0);
@@ -135,6 +166,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 	}
 
+	/**
+	 * This method disposes of the batch and all the components
+	 * in the screen.
+	 */
 	@Override
 	public void dispose () {
 		saveGame();
@@ -142,6 +177,12 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		sp.getImage().dispose();
 	}
 
+	/**
+	 * This method has the logic of the game. It holds the collision checkers,
+	 * knot checkers, spiderBoi, and draws the silk. It also renders the background. Also holds the
+	 * ending state of the game (winObstacle).
+	 * @param level is the level number that takes their data from theit .txt files.
+	 */
 	public void playGame(int level)
 	{
 		batch.begin();
@@ -199,6 +240,9 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	}
 
 
+	/**
+	 *????????????????????????????????????????????????????????????????????????????????????????????????
+	 */
 	public void saveGame() {
 		savedState.putInteger("storeFlyBoi", store.getTotalFlyBoi());
 		savedState.putInteger("totalKnots", Achievement.getTotalKnots());
@@ -217,21 +261,44 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		savedState.flush();
 	}
 
+	/**
+	 * Unused
+	 * @param keycode unused
+	 * @return unused
+	 */
 	@Override
 	public boolean keyDown(int keycode) {
 		return false;
 	}
 
+	/**
+	 * Unused
+	 * @param keycode unused
+	 * @return unused
+	 */
 	@Override
 	public boolean keyUp(int keycode) {
 		return false;
 	}
 
+	/**
+	 * Unused
+	 * @param character unused
+	 * @return unused
+	 */
 	@Override
 	public boolean keyTyped(char character) {
 		return false;
 	}
 
+	/**
+	 * This method helps set the changes between menus (game state is the menus' names. main menu = 1 and leveselection = 2)
+	 * @param screenX is the x coordinate of the pressed location.
+	 * @param screenY is the y coordinate of the pressed location.
+	 * @param pointer unused
+	 * @param button unused
+	 * @return true when the method is called.
+	 */
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		lastTouch = new Vector2(screenX, screenY);
@@ -242,6 +309,14 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		return true;
 	}
 
+	/**
+	 * This method helps set the changes between menus (game state is the menus' names. main menu = 1 and leveselection = 2)
+	 * @param screenX is the x coordinate of the pressed location.
+	 * @param screenY is the y coordinate of the pressed location.
+	 * @param pointer unused
+	 * @param button unused
+	 * @return true when the method is called.
+	 */
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
@@ -274,6 +349,15 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		return true;
 	}
 
+	/**
+	 * This method takes the touch inputs about when the user
+	 * swipes right, left, up or down. It sets teh direction
+	 * and calls the move method.
+	 * @param screenX is the x coordinate of the pressed location.
+	 * @param screenY is the y coordinate of the pressed location.
+	 * @param pointer unused
+	 * @return true when the method is called.
+	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		if(gameState == 6 || gameState == 7) {
@@ -303,12 +387,28 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		return true;
 	}
 
+	/**
+	 * Unused
+	 * @param screenX unused
+	 * @param screenY unused
+	 * @return unused
+	 */
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) { return false; }
 
+	/**
+	 * unused
+	 * @param amount unused
+	 * @return unused
+	 */
 	@Override
 	public boolean scrolled(int amount) { return false; }
 
+	/**
+	 * If the knots made by the player exceeds the max allowed knots hte game ends
+	 * and the game returns the player to the level selection screen.
+	 * @return a boolean value checking if the game is over or not.
+	 */
 	public boolean isGameOver() {
 		if (gameLevel.getMaxAllowedKnots() < silk.getKnotCount()) {
 			return true;
