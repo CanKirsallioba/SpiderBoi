@@ -263,7 +263,7 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
 		mainMenu.resetAll();
-		if (mainMenu.playButtonPressed(lastTouchInv))
+		if (mainMenu.playButtonPressed(lastTouchInv)) {
 			gameState = 2;
 			System.out.println(gameState);
 		}
