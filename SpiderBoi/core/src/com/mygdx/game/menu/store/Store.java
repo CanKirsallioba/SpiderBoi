@@ -50,15 +50,17 @@ public class Store {
 
         totalFlyBoi = savedState.getInteger("storeFlyBoi");
 
-        for (int index = 0; index < savedState.getString("unlockedSkins").length(); index++) {
+        /*for (int index = 0; index < savedState.getString("unlockedSkins").length(); index++) {
             spiderBoiSkinUnlockedList.add(spiderBoiSkinList.get(Integer.parseInt(savedState.getString("unlockedSkins").substring(index, index + 1))));
         }
         for (int index = 0; index < savedState.getString("unlockedBackgrounds").length(); index++) {
             spiderBoiBackgroundUnlockedList.add(spiderBoiBackgroundList.get(Integer.parseInt(savedState.getString("unlockedBackgrounds").substring(index, index + 1))));
-        }
+        }*/
 
-        selectedSpiderBoiSkin = spiderBoiSkinList.get(savedState.getInteger("selectedSkin"));
-        selectedSpiderBoiBackground = spiderBoiBackgroundUnlockedList.get(savedState.getInteger("selectedBackground"));
+        selectedSpiderBoiSkin = spiderBoiSkinList.get(2);
+        selectedSpiderBoiBackground = spiderBoiBackgroundList.get(0);
+//        selectedSpiderBoiSkin = spiderBoiSkinList.get(savedState.getInteger("selectedSkin"));
+//        selectedSpiderBoiBackground = spiderBoiBackgroundUnlockedList.get(savedState.getInteger("selectedBackground"));
         System.out.println(spiderBoiSkinList);
         System.out.println(spiderBoiSkinUnlockedList);
         System.out.println(spiderBoiBackgroundList);
