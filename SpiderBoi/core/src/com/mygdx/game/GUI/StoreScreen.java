@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * A store screen class
+ */
 public class StoreScreen {
 
     //properties
@@ -13,6 +16,9 @@ public class StoreScreen {
     Texture title;
 
     //constructor
+    /**
+     * Store screen constructor
+     */
     public StoreScreen()
     {
         skinL = new Button("KratosBoiD.png", "KratosBoiL.png", 0, 700) ;
@@ -26,7 +32,10 @@ public class StoreScreen {
     }
 
     //methods
-
+    /**
+     * Draws the store screen
+     * @param batch
+     */
     public void draw(SpriteBatch batch)
     {
         batch.begin();
@@ -41,6 +50,9 @@ public class StoreScreen {
         batch.end();
     }
 
+    /**
+     * resets buttons
+     */
     public void resetAll()
     {
         skinL.reset();
@@ -52,6 +64,11 @@ public class StoreScreen {
         buyS.reset();
     }
 
+    /**
+     * make pressed buttons dark
+     * @param x 
+     * @param y
+     */
     public void touchDown(int x, int y)
     {
         Vector2 lastTouchInv = new Vector2(x, Gdx.graphics.getHeight() - y );
@@ -71,23 +88,58 @@ public class StoreScreen {
             buyS.setDark();
     }
 
+    /**
+     * checks skin if it is Pressed
+     * @param pos
+     * @return skinL.isPressed(pos)
+     */
     public boolean skinLButtonPressed(Vector2 pos)
     {
         return skinL.isPressed(pos);
     }
 
+     /**
+     * checks isPressed
+     * @param pos
+     * @return skinR.isPressed(pos)
+     */
     public boolean skinRButtonPressed(Vector2 pos)
     {
         return skinR.isPressed(pos);
     }
 
+    /**
+     * Checkes button if it is pressed
+     * @param pos
+     * @return back.isPressed(pos)
+     */
     public boolean backButtonPressed(Vector2 pos) { return back.isPressed(pos); }
 
+    /**
+     * Checkes button if it is pressed
+     * @param pos
+     * @return backL.isPressed(pos)
+     */
     public boolean backLButtonPressed(Vector2 pos) { return backL.isPressed(pos); }
 
+    /**
+     * Checkes button if it is pressed
+     * @param pos
+     * @return backR.isPressed(pos)
+     */
     public boolean backRButtonPressed(Vector2 pos) { return backR.isPressed(pos); }
 
+     /**
+     * Checkes button if it is pressed
+     * @param pos
+     * @return buyB.isPressed(pos)
+     */
     public boolean buyBButtonPressed(Vector2 pos) { return buyB.isPressed(pos); }
 
+    /**
+     * Checkes button if it is pressed
+     * @param pos
+     * @return buyS.isPressed(pos)
+     */
     public boolean buySButtonPressed(Vector2 pos) { return buyS.isPressed(pos); }
 }
