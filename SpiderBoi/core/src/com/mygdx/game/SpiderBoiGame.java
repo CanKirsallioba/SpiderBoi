@@ -39,8 +39,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	Texture background;
 	Store store;
 	int gameState;
-	Texture playButton, storeButton, achievementsButton, exitButton;
-	Rectangle playRect, storeRect, achievementsRect, exitRect;
 	MainMenu mainMenu;
 	LevelSelection levelSelection;
 	//StoreScreen storeScreen;
@@ -55,7 +53,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		adjustScreen();
 		loadLabels();
 		loadSavedState();
-		initialiseButtons();
 		initialiseMenus();
 	}
 
@@ -66,17 +63,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 		//storeScreen = new StoreScreen();
 	}
 
-	public void initialiseButtons()
-	{
-		playButton = new Texture("playBut1.png");
-		storeButton = new Texture("storeBut1.png");
-		achievementsButton = new Texture("achBut1.png");
-		exitButton = new Texture("exitBut1.png");
-		playRect = new Rectangle(Gdx.graphics.getWidth()/2 - playButton.getWidth()/2, 800, playButton.getWidth(), playButton.getHeight());
-		storeRect = new Rectangle(Gdx.graphics.getWidth()/2 - storeButton.getWidth()/2, 600, storeButton.getWidth(), storeButton.getHeight());
-		achievementsRect = new Rectangle(Gdx.graphics.getWidth()/2 - achievementsButton.getWidth()/2, 400, achievementsButton.getWidth(), achievementsButton.getHeight());
-		exitRect = new Rectangle(Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2, 200, exitButton.getWidth(), exitButton.getHeight());
-	}
 
 	public void initializeVisuals() {
 		batch = new SpriteBatch();
@@ -205,11 +191,6 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 
 		sp.move();
 
-		if(isGameOver() && level == 1)
-		{
-            initializeSpiderBoi();
-			gameState = 2;
-		}
 		if(isGameOver())
 		{
             initializeSpiderBoi();
@@ -254,8 +235,10 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		lastTouch = new Vector2(screenX, screenY);
+		if(gameState == 1)
 		mainMenu.touchDown(screenX, screenY);
-		levelSelection.touchDown(screenX, screenY);
+		if(gameState == 2)
+			levelSelection.touchDown(screenX, screenY);
 		return true;
 	}
 
@@ -263,7 +246,8 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		Vector2 lastTouchInv = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
 		mainMenu.resetAll();
-		if (mainMenu.playButtonPressed(lastTouchInv)) {
+		if (gameState == 1 && mainMenu.playButtonPressed(lastTouchInv))
+		{
 			gameState = 2;
 			System.out.println(gameState);
 		}
@@ -273,47 +257,49 @@ public class SpiderBoiGame extends ApplicationAdapter implements InputProcessor 
 			//gameState = 4;
 		//else if (mainMenu.achievementsButtonPressed(lastTouchInv))
 			//gameState = 5;
-		else if (levelSelection.level1ButtonPressed(lastTouchInv)) {
+		else if (gameState == 2 && levelSelection.level1ButtonPressed(lastTouchInv)) {
 			gameState = 6;
 			gameLevel = new Level(1);
 			gameLevel.showLevel(sp);
 		}
-		else if (levelSelection.level2ButtonPressed(lastTouchInv)) {
+		else if (gameState == 2 && levelSelection.level2ButtonPressed(lastTouchInv)) {
 			gameState = 7;
 			gameLevel = new Level(2);
 			gameLevel.showLevel(sp);
 		}
-		else if (levelSelection.backButtonPressed(lastTouchInv))
+		else if (gameState == 2 && levelSelection.backButtonPressed(lastTouchInv))
 		    gameState = 1;
-		else if (mainMenu.exitButtonPressed(lastTouchInv))
+		else if (gameState == 1 && mainMenu.exitButtonPressed(lastTouchInv))
 			System.exit(1);
 		return true;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		Vector2 newTouch = new Vector2(screenX, screenY);
-		if(newTouch.cpy().sub(lastTouch).len() < SWIPE_THRESHOLD)
-			return false;
-		float angle = newTouch.cpy().sub(lastTouch).angle();
-		if((angle < 45 || angle > 315) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
-			sp.moveRight();
-			lastDirection = "r";
+		if(gameState == 6 || gameState == 7) {
+			Vector2 newTouch = new Vector2(screenX, screenY);
+			if (newTouch.cpy().sub(lastTouch).len() < SWIPE_THRESHOLD)
+				return false;
+			float angle = newTouch.cpy().sub(lastTouch).angle();
+			if ((angle < 45 || angle > 315) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
+				sp.moveRight();
+				lastDirection = "r";
+			}
+			if ((angle > 45 && angle < 135) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
+				sp.moveDown();
+				lastDirection = "d";
+			}
+			if ((angle > 135 && angle < 225) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
+				sp.moveLeft();
+				lastDirection = "l";
+			}
+			if ((angle > 225 && angle < 315) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
+				sp.moveUp();
+				lastDirection = "u";
+			}
+			if (sp.getVelocity().isZero())
+				sp.move();
 		}
-		if((angle > 45 && angle < 135) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
-			sp.moveDown();
-			lastDirection = "d";
-		}
-		if((angle > 135 && angle < 225) && sp.getVelocity().isZero() && !lastDirection.equals("r") && !lastDirection.equals("l")) {
-			sp.moveLeft();
-			lastDirection = "l";
-		}
-		if((angle > 225 && angle < 315) && sp.getVelocity().isZero() && !lastDirection.equals("u") && !lastDirection.equals("d")) {
-			sp.moveUp();
-			lastDirection = "u";
-		}
-		if (sp.getVelocity().isZero())
-			sp.move();
 		return true;
 	}
 
