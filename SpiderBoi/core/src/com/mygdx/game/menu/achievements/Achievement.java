@@ -1,5 +1,11 @@
 package com.mygdx.game.menu.achievements;
 
+/**
+ * This class' implementation is finished but is not in the game.
+ * It is an abstract class which has methods to be used for editing achievements.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public abstract class Achievement {
     protected String name;
     protected String description;

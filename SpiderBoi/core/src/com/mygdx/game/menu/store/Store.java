@@ -8,6 +8,13 @@ import com.mygdx.game.boi.collectableBois.StoreFlyBoi;
 
 import java.util.ArrayList;
 
+/**
+ * This class also couldn't be added to the game due to time coinstraints.
+ * This class holds the objects (skins and backgrounds) in an array, and has
+ * methods to buy them, saving the current currencies in .txt files and so on.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class Store {
 
     //Properties
