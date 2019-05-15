@@ -1,0 +1,8 @@
+com.mygdx.game
+com.mygdx.game.GUI
+com.mygdx.game.boi
+com.mygdx.game.boi.collectableBois
+com.mygdx.game.interfaces
+com.mygdx.game.menu.achievements
+com.mygdx.game.menu.store
+com.mygdx.game.obstacles
