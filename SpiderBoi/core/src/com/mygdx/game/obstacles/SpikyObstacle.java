@@ -5,6 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 
+/**
+ * This class is the blueprint of the spikyObstacles unlike the other classes it has an additional checkCollision method.
+ * When spiderBoi touches the surface it dies and the game returns to the level selection screen.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class SpikyObstacle
         extends Obstacle{
 

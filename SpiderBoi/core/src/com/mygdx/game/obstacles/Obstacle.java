@@ -8,6 +8,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 
+/**
+ * This class is the parent class of the obstacle type classes.
+ * Has methods to maintain the obstacle logic such as checkCollision().
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class Obstacle {
     //properties
     Vector2 position;

@@ -3,6 +3,9 @@ package com.mygdx.game.obstacles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class is not present or implemented in the game.
+ */
 public class SlipperyObstacle
         extends Obstacle {
 

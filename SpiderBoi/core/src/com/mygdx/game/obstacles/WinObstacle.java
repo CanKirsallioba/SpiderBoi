@@ -5,6 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.boi.SpiderBoi;
 
+/**
+ * This class is the blueprint of the finishing obstacle.
+ * It also has a checkCollision() method.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class WinObstacle extends Obstacle {
 
     /**

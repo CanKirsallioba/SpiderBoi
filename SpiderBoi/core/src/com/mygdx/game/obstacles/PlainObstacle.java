@@ -3,6 +3,12 @@ package com.mygdx.game.obstacles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class is the blueprint of the plainObstacle objects.
+ * Only calls the parent constructor sets teh position and image.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class PlainObstacle
         extends Obstacle {
 
