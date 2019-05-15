@@ -16,6 +16,10 @@ import com.mygdx.game.obstacles.WinObstacle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is responsible for creating levels from the .txt files
+ * and putting them in an arraylist.
+ */
 public class Level {
 
     //properties
@@ -64,38 +68,38 @@ public class Level {
             String objectType = mapScan.next();
             if(objectType.equals("pl"))
             {
-                obstacles.add(new PlainObstacle(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                obstacles.add(new PlainObstacle(Integer.parseInt(mapScan.next()) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("sl"))
             {
-                obstacles.add(new SlipperyObstacle(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                obstacles.add(new SlipperyObstacle(Integer.parseInt(mapScan.next()) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("sk"))
             {
-                obstacles.add(new SpikyObstacle((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                obstacles.add(new SpikyObstacle((Integer.parseInt(mapScan.next())) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("sp"))
             {
-                spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next())*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                spiderBoi.setPosition(new Vector2(Integer.parseInt(mapScan.next()) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("wn"))
             {
-                obstacles.add(new WinObstacle((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                obstacles.add(new WinObstacle((Integer.parseInt(mapScan.next())) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("sfb"))
             {
-                collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100,
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                collectableBois.add(new StoreFlyBoi((Integer.parseInt(mapScan.next())) * Gdx.graphics.getWidth() / 100,
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
             else if(objectType.equals("kfb"))
             {
-                collectableBois.add(new KnotFlyBoi(((Integer.parseInt(mapScan.next()))*Gdx.graphics.getWidth()/100),
-                        Integer.parseInt(mapScan.next())*Gdx.graphics.getHeight()/50));
+                collectableBois.add(new KnotFlyBoi(((Integer.parseInt(mapScan.next())) * Gdx.graphics.getWidth() / 100),
+                        Integer.parseInt(mapScan.next()) * Gdx.graphics.getHeight() / 50));
             }
         }
     }
