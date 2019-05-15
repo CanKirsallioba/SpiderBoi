@@ -5,6 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Boi class is the parent class of all the boi classed. It handles
+ * every possible action, getters and setters.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public class Boi {
 
     //properties

@@ -4,6 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.SpiderBoiGame;
 
+/**
+ * This class is the child class of Boi class,
+ * it is the parent class of the flyBoi types.
+ * Has the abstract method perform interaction,
+ * which changes from flyboi to flyBoi.
+ * @author JavaBoiz
+ * @version 13.05.2019
+ */
 public abstract class FlyBoi
         extends Boi {
 

@@ -3,6 +3,11 @@ package com.mygdx.game.boi.collectableBois;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.SpiderBoiGame;
 
+/**
+ * This class is the blueprint of knotFlyBois', it's
+ * constructor calls the parent constructor and it has
+ * a unique performInteraction() method.
+ */
 public class KnotFlyBoi
         extends CollectableBoi {
 

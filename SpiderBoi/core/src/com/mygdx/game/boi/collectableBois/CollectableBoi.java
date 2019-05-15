@@ -9,7 +9,6 @@ import com.mygdx.game.boi.FlyBoi;
  * @author JavaBoiz
  * @version 0.1 on 09.05.2019
  */
-
 public abstract class CollectableBoi
         extends FlyBoi
         implements Interactable {

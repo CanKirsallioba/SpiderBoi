@@ -115,7 +115,7 @@ public class SpiderBoi extends Boi {
      */
     public void moveLeft() {
         setImage(spiderBoiSkin.getLeftSpiderBoi());
-        velocity.set(speed*(-1), 0);
+        velocity.set(speed * (-1), 0);
     }
 
     /**
@@ -127,11 +127,11 @@ public class SpiderBoi extends Boi {
     }
 
     /**
-     * This method helps the SpiderBoi move to the doen, and sets the velocity to 20.
+     * This method helps the SpiderBoi move to the down, and sets the velocity to 20.
      */
     public void moveDown() {
         setImage(spiderBoiSkin.getDownSpiderBoi());
-        velocity.set(0, speed*(-1));
+        velocity.set(0, speed * (-1));
     }
 
 }
