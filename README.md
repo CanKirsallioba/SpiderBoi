@@ -6,7 +6,7 @@ Our project aims to create a 2D puzzle platformer game for mobile devices, in wh
 The game features a selection of different levels, collectibles called FlyBois that grant different powers when collected, a store from which different skins and backgrounds can be purchased using FlyBois for aesthetic purposes, a variety of different surfaces and hostile creatures called DragonFlyBois.
 
 ## Developers
-Arda Akça Büyük, Barış Tiftik, Burak Yiğit Uslu, Can Kırımca, Can Kırşallıoba, Sena Sultan Karataş
+Arda Akça Büyük, Barış Tiftik, Burak Yiğit Uslu, Can Kırımca, Can Kırşallıoba
 
 ### Any Suggestions?
 Feel free to contact us if you have any suggestions.
