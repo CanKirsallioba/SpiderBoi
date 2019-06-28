@@ -10,3 +10,13 @@ Arda Akça Büyük, Barış Tiftik, Burak Yiğit Uslu, Can Kırımca, Can Kırş
 
 ### Any Suggestions?
 Feel free to contact us if you have any suggestions.
+
+####Here are some screenshots of the game
+</br>
+This is the menu screen : 
+</br>
+[menu](https://user-images.githubusercontent.com/49129982/60363236-a2d8eb00-99eb-11e9-97e0-7fa65679f76c.png)
+</br>
+This is the level selection screen : 
+</br>
+[level]()
