@@ -16,15 +16,15 @@ Feel free to contact us if you have any suggestions.
 This is the menu screen : 
 </br>
 ![menu](https://user-images.githubusercontent.com/49129982/60363236-a2d8eb00-99eb-11e9-97e0-7fa65679f76c.png)
-</br>
+
 This is the level selection screen : 
 </br>
 ![level](https://user-images.githubusercontent.com/49129982/60363408-18dd5200-99ec-11e9-97f4-163e0e13cf2d.png)
-</br>
+
 This is an example level :
 </br>
 ![examplelevel]()
-</br>
+
 This is an in-game screen : 
 </br>
 ![levelcompleted]()
