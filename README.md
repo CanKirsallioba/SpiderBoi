@@ -12,11 +12,11 @@ Arda Akça Büyük, Barış Tiftik, Burak Yiğit Uslu, Can Kırımca, Can Kırş
 Feel free to contact us if you have any suggestions.
 
 #### Here are some screenshots of the game
-This is the menu screen : 
+##### This is the menu screen : 
 ![menu](https://user-images.githubusercontent.com/49129982/60363236-a2d8eb00-99eb-11e9-97e0-7fa65679f76c.png)
-This is the level selection screen : 
+##### This is the level selection screen : 
 ![level](https://user-images.githubusercontent.com/49129982/60363408-18dd5200-99ec-11e9-97f4-163e0e13cf2d.png)
-This is an example level :
-![examplelevel]()
-This is an in-game screen : 
-![levelcompleted]()
+##### This is an example level :
+![examplelevel](https://user-images.githubusercontent.com/49129982/60366607-b0df3980-99f4-11e9-8c68-f2ef1b058222.png)
+##### This is an in-game screen : 
+![levelcompleted](https://user-images.githubusercontent.com/49129982/60366661-d704d980-99f4-11e9-9bc0-3924a6868bce.png)
